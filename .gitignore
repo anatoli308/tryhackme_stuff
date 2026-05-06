@@ -1,0 +1,12 @@
+.venv
+captchas
+venv
+__pycache__
+*.pyc
+*.pyo
+*.png
+*.bin
+*.jpg
+*.jpeg
+*.gif
+*.log

@@ -1,0 +1,277 @@
+TEXT main.decryptFile(SB) /root/Desktop/CTF/carpediem/decrypt/decrypt.go
+  decrypt.go:26		0x4a2620		64488b0c25f8ffffff	MOVQ FS:0xfffffff8, CX					
+  decrypt.go:26		0x4a2629		488d842440ffffff	LEAQ 0xffffff40(SP), AX					
+  decrypt.go:26		0x4a2631		483b4110		CMPQ AX, 0x10(CX)					
+  decrypt.go:26		0x4a2635		0f8617060000		JBE 0x4a2c52						
+  decrypt.go:26		0x4a263b		4881ec40010000		SUBQ $0x140, SP						
+  decrypt.go:26		0x4a2642		4889ac2438010000	MOVQ BP, 0x138(SP)					
+  decrypt.go:26		0x4a264a		488dac2438010000	LEAQ 0x138(SP), BP					
+  decrypt.go:30		0x4a2652		488b842458010000	MOVQ 0x158(SP), AX					
+  decrypt.go:30		0x4a265a		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:30		0x4a265e		488b842460010000	MOVQ 0x160(SP), AX					
+  decrypt.go:30		0x4a2666		4889442408		MOVQ AX, 0x8(SP)					
+  decrypt.go:30		0x4a266b		e870faffff		CALL io/ioutil.ReadFile(SB)				
+  decrypt.go:30		0x4a2670		488b442410		MOVQ 0x10(SP), AX					
+  decrypt.go:30		0x4a2675		488b4c2420		MOVQ 0x20(SP), CX					
+  decrypt.go:30		0x4a267a		488b542418		MOVQ 0x18(SP), DX					
+  decrypt.go:30		0x4a267f		488b5c2430		MOVQ 0x30(SP), BX					
+  decrypt.go:30		0x4a2684		488b742428		MOVQ 0x28(SP), SI					
+  decrypt.go:31		0x4a2689		4885f6			TESTQ SI, SI						
+  decrypt.go:31		0x4a268c		746e			JE 0x4a26fc						
+  decrypt.go:32		0x4a268e		7467			JE 0x4a26f7						
+  decrypt.go:32		0x4a2690		488b4608		MOVQ 0x8(SI), AX					
+  decrypt.go:32		0x4a2694		0f57c0			XORPS X0, X0						
+  decrypt.go:32		0x4a2697		0f118424e8000000	MOVUPS X0, 0xe8(SP)					
+  decrypt.go:32		0x4a269f		48898424e8000000	MOVQ AX, 0xe8(SP)					
+  decrypt.go:32		0x4a26a7		48899c24f0000000	MOVQ BX, 0xf0(SP)					
+  decrypt.go:32		0x4a26af		488d0591b20300		LEAQ 0x3b291(IP), AX					
+  decrypt.go:32		0x4a26b6		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:32		0x4a26ba		48c744240813000000	MOVQ $0x13, 0x8(SP)					
+  decrypt.go:32		0x4a26c3		488d8424e8000000	LEAQ 0xe8(SP), AX					
+  decrypt.go:32		0x4a26cb		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:32		0x4a26d0		48c744241801000000	MOVQ $0x1, 0x18(SP)					
+  decrypt.go:32		0x4a26d9		48c744242001000000	MOVQ $0x1, 0x20(SP)					
+  decrypt.go:32		0x4a26e2		e819b7feff		CALL fmt.Errorf(SB)					
+  decrypt.go:33		0x4a26e7		488bac2438010000	MOVQ 0x138(SP), BP					
+  decrypt.go:33		0x4a26ef		4881c440010000		ADDQ $0x140, SP						
+  decrypt.go:33		0x4a26f6		c3			RET							
+  decrypt.go:32		0x4a26f7		4889f0			MOVQ SI, AX						
+  decrypt.go:32		0x4a26fa		eb98			JMP 0x4a2694						
+  decrypt.go:30		0x4a26fc		48898424c8000000	MOVQ AX, 0xc8(SP)					
+  decrypt.go:30		0x4a2704		48898c2498000000	MOVQ CX, 0x98(SP)					
+  decrypt.go:30		0x4a270c		48899424b0000000	MOVQ DX, 0xb0(SP)					
+  decrypt.go:37		0x4a2714		488b05b5710e00		MOVQ encoding/base64.StdEncoding(SB), AX		
+  decrypt.go:37		0x4a271b		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:37		0x4a271f		488b842448010000	MOVQ 0x148(SP), AX					
+  decrypt.go:37		0x4a2727		4889442408		MOVQ AX, 0x8(SP)					
+  decrypt.go:37		0x4a272c		488b842450010000	MOVQ 0x150(SP), AX					
+  decrypt.go:37		0x4a2734		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:37		0x4a2739		e83272ffff		CALL encoding/base64.(*Encoding).DecodeString(SB)	
+  decrypt.go:37		0x4a273e		488b442418		MOVQ 0x18(SP), AX					
+  decrypt.go:37		0x4a2743		488b542428		MOVQ 0x28(SP), DX					
+  decrypt.go:37		0x4a2748		488b4c2438		MOVQ 0x38(SP), CX					
+  decrypt.go:37		0x4a274d		488b5c2430		MOVQ 0x30(SP), BX					
+  decrypt.go:38		0x4a2752		4885db			TESTQ BX, BX						
+  decrypt.go:38		0x4a2755		0f849e000000		JE 0x4a27f9						
+  decrypt.go:39		0x4a275b		0f8490000000		JE 0x4a27f1						
+  decrypt.go:39		0x4a2761		488b4308		MOVQ 0x8(BX), AX					
+  decrypt.go:39		0x4a2765		0f57c0			XORPS X0, X0						
+  decrypt.go:39		0x4a2768		0f118424f8000000	MOVUPS X0, 0xf8(SP)					
+  decrypt.go:39		0x4a2770		0f11842408010000	MOVUPS X0, 0x108(SP)					
+  decrypt.go:39		0x4a2778		488d15412c0100		LEAQ 0x12c41(IP), DX					
+  decrypt.go:39		0x4a277f		48899424f8000000	MOVQ DX, 0xf8(SP)					
+  decrypt.go:39		0x4a2787		488d15d2350500		LEAQ 0x535d2(IP), DX					
+  decrypt.go:39		0x4a278e		4889942400010000	MOVQ DX, 0x100(SP)					
+  decrypt.go:39		0x4a2796		4889842408010000	MOVQ AX, 0x108(SP)					
+  decrypt.go:39		0x4a279e		48898c2410010000	MOVQ CX, 0x110(SP)					
+  print.go:274		0x4a27a6		488b0543710e00		MOVQ os.Stdout(SB), AX					
+  print.go:274		0x4a27ad		488d0dec4c0500		LEAQ go.itab.*os.File,io.Writer(SB), CX			
+  print.go:274		0x4a27b4		48890c24		MOVQ CX, 0(SP)						
+  print.go:274		0x4a27b8		4889442408		MOVQ AX, 0x8(SP)					
+  print.go:274		0x4a27bd		488d8424f8000000	LEAQ 0xf8(SP), AX					
+  print.go:274		0x4a27c5		4889442410		MOVQ AX, 0x10(SP)					
+  print.go:274		0x4a27ca		48c744241802000000	MOVQ $0x2, 0x18(SP)					
+  print.go:274		0x4a27d3		48c744242002000000	MOVQ $0x2, 0x20(SP)					
+  print.go:274		0x4a27dc		e80fe5feff		CALL fmt.Fprintln(SB)					
+  decrypt.go:40		0x4a27e1		488bac2438010000	MOVQ 0x138(SP), BP					
+  decrypt.go:40		0x4a27e9		4881c440010000		ADDQ $0x140, SP						
+  decrypt.go:40		0x4a27f0		c3			RET							
+  decrypt.go:39		0x4a27f1		4889d8			MOVQ BX, AX						
+  decrypt.go:39		0x4a27f4		e96cffffff		JMP 0x4a2765						
+  decrypt.go:42		0x4a27f9		4883fa10		CMPQ DX, $0x10						
+  decrypt.go:42		0x4a27fd		0f8244040000		JB 0x4a2c47						
+  decrypt.go:46		0x4a2803		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:46		0x4a2807		48c744240810000000	MOVQ $0x10, 0x8(SP)					
+  decrypt.go:46		0x4a2810		4889542410		MOVQ DX, 0x10(SP)					
+  decrypt.go:46		0x4a2815		e826b3ffff		CALL crypto/aes.NewCipher(SB)				
+  decrypt.go:46		0x4a281a		488b442418		MOVQ 0x18(SP), AX					
+  decrypt.go:46		0x4a281f		488b4c2430		MOVQ 0x30(SP), CX					
+  decrypt.go:46		0x4a2824		488b542420		MOVQ 0x20(SP), DX					
+  decrypt.go:46		0x4a2829		488b5c2428		MOVQ 0x28(SP), BX					
+  decrypt.go:47		0x4a282e		4885db			TESTQ BX, BX						
+  decrypt.go:47		0x4a2831		0f84c1000000		JE 0x4a28f8						
+  decrypt.go:46		0x4a2837		48898c24d8000000	MOVQ CX, 0xd8(SP)					
+  decrypt.go:46		0x4a283f		48899c24a8000000	MOVQ BX, 0xa8(SP)					
+  decrypt.go:48		0x4a2847		488b842450010000	MOVQ 0x150(SP), AX					
+  decrypt.go:48		0x4a284f		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:48		0x4a2853		e8d866f6ff		CALL runtime.convT64(SB)				
+  decrypt.go:48		0x4a2858		488b442408		MOVQ 0x8(SP), AX					
+  decrypt.go:47		0x4a285d		488b8c24a8000000	MOVQ 0xa8(SP), CX					
+  decrypt.go:47		0x4a2865		4885c9			TESTQ CX, CX						
+  decrypt.go:48		0x4a2868		7404			JE 0x4a286e						
+  decrypt.go:48		0x4a286a		488b4908		MOVQ 0x8(CX), CX					
+  decrypt.go:48		0x4a286e		0f57c0			XORPS X0, X0						
+  decrypt.go:48		0x4a2871		0f11842418010000	MOVUPS X0, 0x118(SP)					
+  decrypt.go:48		0x4a2879		0f11842428010000	MOVUPS X0, 0x128(SP)					
+  decrypt.go:48		0x4a2881		488d15b8210100		LEAQ 0x121b8(IP), DX					
+  decrypt.go:48		0x4a2888		4889942418010000	MOVQ DX, 0x118(SP)					
+  decrypt.go:48		0x4a2890		4889842420010000	MOVQ AX, 0x120(SP)					
+  decrypt.go:48		0x4a2898		48898c2428010000	MOVQ CX, 0x128(SP)					
+  decrypt.go:48		0x4a28a0		488b8424d8000000	MOVQ 0xd8(SP), AX					
+  decrypt.go:48		0x4a28a8		4889842430010000	MOVQ AX, 0x130(SP)					
+  decrypt.go:48		0x4a28b0		488d05bbc10300		LEAQ 0x3c1bb(IP), AX					
+  decrypt.go:48		0x4a28b7		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:48		0x4a28bb		48c744240818000000	MOVQ $0x18, 0x8(SP)					
+  decrypt.go:48		0x4a28c4		488d842418010000	LEAQ 0x118(SP), AX					
+  decrypt.go:48		0x4a28cc		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:48		0x4a28d1		48c744241802000000	MOVQ $0x2, 0x18(SP)					
+  decrypt.go:48		0x4a28da		48c744242002000000	MOVQ $0x2, 0x20(SP)					
+  decrypt.go:48		0x4a28e3		e818b5feff		CALL fmt.Errorf(SB)					
+  decrypt.go:49		0x4a28e8		488bac2438010000	MOVQ 0x138(SP), BP					
+  decrypt.go:49		0x4a28f0		4881c440010000		ADDQ $0x140, SP						
+  decrypt.go:49		0x4a28f7		c3			RET							
+  decrypt.go:53		0x4a28f8		90			NOPL							
+  gcm.go:85		0x4a28f9		48890424		MOVQ AX, 0(SP)						
+  gcm.go:85		0x4a28fd		4889542408		MOVQ DX, 0x8(SP)					
+  gcm.go:85		0x4a2902		48c74424100c000000	MOVQ $0xc, 0x10(SP)					
+  gcm.go:85		0x4a290b		48c744241810000000	MOVQ $0x10, 0x18(SP)					
+  gcm.go:85		0x4a2914		e8477dffff		CALL crypto/cipher.newGCMWithNonceAndTagSize(SB)	
+  gcm.go:85		0x4a2919		488b442428		MOVQ 0x28(SP), AX					
+  gcm.go:85		0x4a291e		488b4c2420		MOVQ 0x20(SP), CX					
+  gcm.go:85		0x4a2923		488b542430		MOVQ 0x30(SP), DX					
+  gcm.go:85		0x4a2928		488b5c2438		MOVQ 0x38(SP), BX					
+  decrypt.go:54		0x4a292d		4885d2			TESTQ DX, DX						
+  decrypt.go:54		0x4a2930		746e			JE 0x4a29a0						
+  decrypt.go:55		0x4a2932		7467			JE 0x4a299b						
+  decrypt.go:55		0x4a2934		488b4208		MOVQ 0x8(DX), AX					
+  decrypt.go:55		0x4a2938		0f57c0			XORPS X0, X0						
+  decrypt.go:55		0x4a293b		0f118424e8000000	MOVUPS X0, 0xe8(SP)					
+  decrypt.go:55		0x4a2943		48898424e8000000	MOVQ AX, 0xe8(SP)					
+  decrypt.go:55		0x4a294b		48899c24f0000000	MOVQ BX, 0xf0(SP)					
+  decrypt.go:55		0x4a2953		488d05e3a70300		LEAQ 0x3a7e3(IP), AX					
+  decrypt.go:55		0x4a295a		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:55		0x4a295e		48c744240810000000	MOVQ $0x10, 0x8(SP)					
+  decrypt.go:55		0x4a2967		488d8424e8000000	LEAQ 0xe8(SP), AX					
+  decrypt.go:55		0x4a296f		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:55		0x4a2974		48c744241801000000	MOVQ $0x1, 0x18(SP)					
+  decrypt.go:55		0x4a297d		48c744242001000000	MOVQ $0x1, 0x20(SP)					
+  decrypt.go:55		0x4a2986		e875b4feff		CALL fmt.Errorf(SB)					
+  decrypt.go:56		0x4a298b		488bac2438010000	MOVQ 0x138(SP), BP					
+  decrypt.go:56		0x4a2993		4881c440010000		ADDQ $0x140, SP						
+  decrypt.go:56		0x4a299a		c3			RET							
+  decrypt.go:55		0x4a299b		4889d0			MOVQ DX, AX						
+  decrypt.go:55		0x4a299e		eb98			JMP 0x4a2938						
+  gcm.go:85		0x4a29a0		48898424d0000000	MOVQ AX, 0xd0(SP)					
+  gcm.go:85		0x4a29a8		48898c24a0000000	MOVQ CX, 0xa0(SP)					
+  decrypt.go:60		0x4a29b0		488b5118		MOVQ 0x18(CX), DX					
+  decrypt.go:60		0x4a29b4		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:60		0x4a29b8		ffd2			CALL DX							
+  decrypt.go:60		0x4a29ba		488b4c2408		MOVQ 0x8(SP), CX					
+  decrypt.go:60		0x4a29bf		488b942498000000	MOVQ 0x98(SP), DX					
+  decrypt.go:60		0x4a29c7		4839d1			CMPQ CX, DX						
+  decrypt.go:60		0x4a29ca		0f8772020000		JA 0x4a2c42						
+  decrypt.go:60		0x4a29d0		48898c2490000000	MOVQ CX, 0x90(SP)					
+  decrypt.go:60		0x4a29d8		488b8424a0000000	MOVQ 0xa0(SP), AX					
+  decrypt.go:60		0x4a29e0		488b4818		MOVQ 0x18(AX), CX					
+  decrypt.go:60		0x4a29e4		488b9424d0000000	MOVQ 0xd0(SP), DX					
+  decrypt.go:60		0x4a29ec		48891424		MOVQ DX, 0(SP)						
+  decrypt.go:60		0x4a29f0		ffd1			CALL CX							
+  decrypt.go:60		0x4a29f2		488b442408		MOVQ 0x8(SP), AX					
+  decrypt.go:60		0x4a29f7		488b8c24b0000000	MOVQ 0xb0(SP), CX					
+  decrypt.go:60		0x4a29ff		4839c8			CMPQ AX, CX						
+  decrypt.go:60		0x4a2a02		0f8735020000		JA 0x4a2c3d						
+  decrypt.go:64		0x4a2a08		488b9424a0000000	MOVQ 0xa0(SP), DX					
+  decrypt.go:64		0x4a2a10		488b5220		MOVQ 0x20(DX), DX					
+  decrypt.go:64		0x4a2a14		488b9c24d0000000	MOVQ 0xd0(SP), BX					
+  decrypt.go:64		0x4a2a1c		48891c24		MOVQ BX, 0(SP)						
+  decrypt.go:64		0x4a2a20		48c744240800000000	MOVQ $0x0, 0x8(SP)					
+  decrypt.go:64		0x4a2a29		0f57c0			XORPS X0, X0						
+  decrypt.go:64		0x4a2a2c		0f11442410		MOVUPS X0, 0x10(SP)					
+  decrypt.go:64		0x4a2a31		488b9c24c8000000	MOVQ 0xc8(SP), BX					
+  decrypt.go:64		0x4a2a39		48895c2420		MOVQ BX, 0x20(SP)					
+  decrypt.go:64		0x4a2a3e		488bb42490000000	MOVQ 0x90(SP), SI					
+  decrypt.go:64		0x4a2a46		4889742428		MOVQ SI, 0x28(SP)					
+  decrypt.go:64		0x4a2a4b		488bb42498000000	MOVQ 0x98(SP), SI					
+  decrypt.go:64		0x4a2a53		4889742430		MOVQ SI, 0x30(SP)					
+  decrypt.go:60		0x4a2a58		4829c6			SUBQ AX, SI						
+  decrypt.go:60		0x4a2a5b		4889f7			MOVQ SI, DI						
+  decrypt.go:60		0x4a2a5e		48f7de			NEGQ SI							
+  decrypt.go:60		0x4a2a61		48c1fe3f		SARQ $0x3f, SI						
+  decrypt.go:60		0x4a2a65		4821c6			ANDQ AX, SI						
+  decrypt.go:60		0x4a2a68		4801f3			ADDQ SI, BX						
+  decrypt.go:64		0x4a2a6b		48895c2438		MOVQ BX, 0x38(SP)					
+  decrypt.go:60		0x4a2a70		4829c1			SUBQ AX, CX						
+  decrypt.go:64		0x4a2a73		48894c2440		MOVQ CX, 0x40(SP)					
+  decrypt.go:64		0x4a2a78		48897c2448		MOVQ DI, 0x48(SP)					
+  decrypt.go:64		0x4a2a7d		48c744245000000000	MOVQ $0x0, 0x50(SP)					
+  decrypt.go:64		0x4a2a86		0f11442458		MOVUPS X0, 0x58(SP)					
+  decrypt.go:64		0x4a2a8b		ffd2			CALL DX							
+  decrypt.go:64		0x4a2a8d		488b842488000000	MOVQ 0x88(SP), AX					
+  decrypt.go:64		0x4a2a95		488b8c2480000000	MOVQ 0x80(SP), CX					
+  decrypt.go:64		0x4a2a9d		488b542470		MOVQ 0x70(SP), DX					
+  decrypt.go:64		0x4a2aa2		488b5c2468		MOVQ 0x68(SP), BX					
+  decrypt.go:64		0x4a2aa7		488b742478		MOVQ 0x78(SP), SI					
+  decrypt.go:65		0x4a2aac		4885c9			TESTQ CX, CX						
+  decrypt.go:65		0x4a2aaf		7469			JE 0x4a2b1a						
+  decrypt.go:66		0x4a2ab1		7404			JE 0x4a2ab7						
+  decrypt.go:66		0x4a2ab3		488b4908		MOVQ 0x8(CX), CX					
+  decrypt.go:66		0x4a2ab7		0f57c0			XORPS X0, X0						
+  decrypt.go:66		0x4a2aba		0f118424e8000000	MOVUPS X0, 0xe8(SP)					
+  decrypt.go:66		0x4a2ac2		48898c24e8000000	MOVQ CX, 0xe8(SP)					
+  decrypt.go:66		0x4a2aca		48898424f0000000	MOVQ AX, 0xf0(SP)					
+  decrypt.go:66		0x4a2ad2		488d0580ac0300		LEAQ 0x3ac80(IP), AX					
+  decrypt.go:66		0x4a2ad9		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:66		0x4a2add		48c744240812000000	MOVQ $0x12, 0x8(SP)					
+  decrypt.go:66		0x4a2ae6		488d8424e8000000	LEAQ 0xe8(SP), AX					
+  decrypt.go:66		0x4a2aee		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:66		0x4a2af3		48c744241801000000	MOVQ $0x1, 0x18(SP)					
+  decrypt.go:66		0x4a2afc		48c744242001000000	MOVQ $0x1, 0x20(SP)					
+  decrypt.go:66		0x4a2b05		e8f6b2feff		CALL fmt.Errorf(SB)					
+  decrypt.go:67		0x4a2b0a		488bac2438010000	MOVQ 0x138(SP), BP					
+  decrypt.go:67		0x4a2b12		4881c440010000		ADDQ $0x140, SP						
+  decrypt.go:67		0x4a2b19		c3			RET							
+  decrypt.go:64		0x4a2b1a		48899424b8000000	MOVQ DX, 0xb8(SP)					
+  decrypt.go:64		0x4a2b22		48899c24e0000000	MOVQ BX, 0xe0(SP)					
+  decrypt.go:64		0x4a2b2a		4889b424c0000000	MOVQ SI, 0xc0(SP)					
+  decrypt.go:70		0x4a2b32		48c7042400000000	MOVQ $0x0, 0(SP)					
+  decrypt.go:70		0x4a2b3a		488b842468010000	MOVQ 0x168(SP), AX					
+  decrypt.go:70		0x4a2b42		4889442408		MOVQ AX, 0x8(SP)					
+  decrypt.go:70		0x4a2b47		488b842470010000	MOVQ 0x170(SP), AX					
+  decrypt.go:70		0x4a2b4f		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:70		0x4a2b54		488d05eb920300		LEAQ 0x392eb(IP), AX					
+  decrypt.go:70		0x4a2b5b		4889442418		MOVQ AX, 0x18(SP)					
+  decrypt.go:70		0x4a2b60		48c744242008000000	MOVQ $0x8, 0x20(SP)					
+  decrypt.go:70		0x4a2b69		e872e5f9ff		CALL runtime.concatstring2(SB)				
+  decrypt.go:70		0x4a2b6e		488b442430		MOVQ 0x30(SP), AX					
+  decrypt.go:70		0x4a2b73		488b4c2428		MOVQ 0x28(SP), CX					
+  decrypt.go:70		0x4a2b78		48890c24		MOVQ CX, 0(SP)						
+  decrypt.go:70		0x4a2b7c		4889442408		MOVQ AX, 0x8(SP)					
+  decrypt.go:70		0x4a2b81		488b8424e0000000	MOVQ 0xe0(SP), AX					
+  decrypt.go:70		0x4a2b89		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:70		0x4a2b8e		488b8424b8000000	MOVQ 0xb8(SP), AX					
+  decrypt.go:70		0x4a2b96		4889442418		MOVQ AX, 0x18(SP)					
+  decrypt.go:70		0x4a2b9b		488b8424c0000000	MOVQ 0xc0(SP), AX					
+  decrypt.go:70		0x4a2ba3		4889442420		MOVQ AX, 0x20(SP)					
+  decrypt.go:70		0x4a2ba8		c744242858020000	MOVL $0x258, 0x28(SP)					
+  decrypt.go:70		0x4a2bb0		e82bf7ffff		CALL io/ioutil.WriteFile(SB)				
+  decrypt.go:70		0x4a2bb5		488b442430		MOVQ 0x30(SP), AX					
+  decrypt.go:70		0x4a2bba		488b4c2438		MOVQ 0x38(SP), CX					
+  decrypt.go:71		0x4a2bbf		4885c0			TESTQ AX, AX						
+  decrypt.go:71		0x4a2bc2		7469			JE 0x4a2c2d						
+  decrypt.go:72		0x4a2bc4		7404			JE 0x4a2bca						
+  decrypt.go:72		0x4a2bc6		488b4008		MOVQ 0x8(AX), AX					
+  decrypt.go:72		0x4a2bca		0f57c0			XORPS X0, X0						
+  decrypt.go:72		0x4a2bcd		0f118424e8000000	MOVUPS X0, 0xe8(SP)					
+  decrypt.go:72		0x4a2bd5		48898424e8000000	MOVQ AX, 0xe8(SP)					
+  decrypt.go:72		0x4a2bdd		48898c24f0000000	MOVQ CX, 0xf0(SP)					
+  decrypt.go:72		0x4a2be5		488d05fed60300		LEAQ 0x3d6fe(IP), AX					
+  decrypt.go:72		0x4a2bec		48890424		MOVQ AX, 0(SP)						
+  decrypt.go:72		0x4a2bf0		48c744240820000000	MOVQ $0x20, 0x8(SP)					
+  decrypt.go:72		0x4a2bf9		488d8424e8000000	LEAQ 0xe8(SP), AX					
+  decrypt.go:72		0x4a2c01		4889442410		MOVQ AX, 0x10(SP)					
+  decrypt.go:72		0x4a2c06		48c744241801000000	MOVQ $0x1, 0x18(SP)					
+  decrypt.go:72		0x4a2c0f		48c744242001000000	MOVQ $0x1, 0x20(SP)					
+  decrypt.go:72		0x4a2c18		e8e3b1feff		CALL fmt.Errorf(SB)					
+  decrypt.go:73		0x4a2c1d		488bac2438010000	MOVQ 0x138(SP), BP					
+  decrypt.go:73		0x4a2c25		4881c440010000		ADDQ $0x140, SP						
+  decrypt.go:73		0x4a2c2c		c3			RET							
+  decrypt.go:76		0x4a2c2d		488bac2438010000	MOVQ 0x138(SP), BP					
+  decrypt.go:76		0x4a2c35		4881c440010000		ADDQ $0x140, SP						
+  decrypt.go:76		0x4a2c3c		c3			RET							
+  decrypt.go:60		0x4a2c3d		e8be18fbff		CALL runtime.panicSliceB(SB)				
+  decrypt.go:60		0x4a2c42		e89918fbff		CALL runtime.panicSliceAcap(SB)				
+  decrypt.go:42		0x4a2c47		b910000000		MOVL $0x10, CX						
+  decrypt.go:42		0x4a2c4c		e88f18fbff		CALL runtime.panicSliceAcap(SB)				
+  decrypt.go:42		0x4a2c51		90			NOPL							
+  decrypt.go:26		0x4a2c52		e8d9f0faff		CALL runtime.morestack_noctxt(SB)			
+  decrypt.go:26		0x4a2c57		e9c4f9ffff		JMP main.decryptFile(SB)				

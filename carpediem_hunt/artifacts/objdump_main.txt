@@ -1,0 +1,45 @@
+TEXT main.main(SB) /root/Desktop/CTF/carpediem/decrypt/decrypt.go
+  decrypt.go:12		0x4a2550		64488b0c25f8ffffff	MOVQ FS:0xfffffff8, CX			
+  decrypt.go:12		0x4a2559		483b6110		CMPQ SP, 0x10(CX)			
+  decrypt.go:12		0x4a255d		0f86aa000000		JBE 0x4a260d				
+  decrypt.go:12		0x4a2563		4883ec38		SUBQ $0x38, SP				
+  decrypt.go:12		0x4a2567		48896c2430		MOVQ BP, 0x30(SP)			
+  decrypt.go:12		0x4a256c		488d6c2430		LEAQ 0x30(SP), BP			
+  decrypt.go:14		0x4a2571		48833dcf770e0004	CMPQ os.Args+8(SB), $0x4		
+  decrypt.go:14		0x4a2579		7564			JNE 0x4a25df				
+  decrypt.go:20		0x4a257b		488b15be770e00		MOVQ os.Args(SB), DX			
+  decrypt.go:20		0x4a2582		488b0dbf770e00		MOVQ os.Args+8(SB), CX			
+  decrypt.go:20		0x4a2589		4883f901		CMPQ CX, $0x1				
+  decrypt.go:20		0x4a258d		7673			JBE 0x4a2602				
+  decrypt.go:20		0x4a258f		488b5a10		MOVQ 0x10(DX), BX			
+  decrypt.go:20		0x4a2593		488b7218		MOVQ 0x18(DX), SI			
+  decrypt.go:21		0x4a2597		4883f902		CMPQ CX, $0x2				
+  decrypt.go:21		0x4a259b		765b			JBE 0x4a25f8				
+  decrypt.go:21		0x4a259d		488b7a20		MOVQ 0x20(DX), DI			
+  decrypt.go:21		0x4a25a1		4c8b4228		MOVQ 0x28(DX), R8			
+  decrypt.go:22		0x4a25a5		4883f903		CMPQ CX, $0x3				
+  decrypt.go:22		0x4a25a9		7643			JBE 0x4a25ee				
+  decrypt.go:22		0x4a25ab		488b4230		MOVQ 0x30(DX), AX			
+  decrypt.go:22		0x4a25af		488b4a38		MOVQ 0x38(DX), CX			
+  decrypt.go:23		0x4a25b3		48891c24		MOVQ BX, 0(SP)				
+  decrypt.go:23		0x4a25b7		4889742408		MOVQ SI, 0x8(SP)			
+  decrypt.go:23		0x4a25bc		48897c2410		MOVQ DI, 0x10(SP)			
+  decrypt.go:23		0x4a25c1		4c89442418		MOVQ R8, 0x18(SP)			
+  decrypt.go:23		0x4a25c6		4889442420		MOVQ AX, 0x20(SP)			
+  decrypt.go:23		0x4a25cb		48894c2428		MOVQ CX, 0x28(SP)			
+  decrypt.go:23		0x4a25d0		e84b000000		CALL main.decryptFile(SB)		
+  decrypt.go:24		0x4a25d5		488b6c2430		MOVQ 0x30(SP), BP			
+  decrypt.go:24		0x4a25da		4883c438		ADDQ $0x38, SP				
+  decrypt.go:24		0x4a25de		c3			RET					
+  decrypt.go:15		0x4a25df		48c7042400000000	MOVQ $0x0, 0(SP)			
+  decrypt.go:15		0x4a25e7		e8b4a3fcff		CALL os.Exit(SB)			
+  decrypt.go:15		0x4a25ec		eb8d			JMP 0x4a257b				
+  decrypt.go:22		0x4a25ee		b803000000		MOVL $0x3, AX				
+  decrypt.go:22		0x4a25f3		e8a81efbff		CALL runtime.panicIndex(SB)		
+  decrypt.go:21		0x4a25f8		b802000000		MOVL $0x2, AX				
+  decrypt.go:21		0x4a25fd		e89e1efbff		CALL runtime.panicIndex(SB)		
+  decrypt.go:20		0x4a2602		b801000000		MOVL $0x1, AX				
+  decrypt.go:20		0x4a2607		e8941efbff		CALL runtime.panicIndex(SB)		
+  decrypt.go:20		0x4a260c		90			NOPL					
+  decrypt.go:12		0x4a260d		e81ef7faff		CALL runtime.morestack_noctxt(SB)	
+  decrypt.go:12		0x4a2612		e939ffffff		JMP main.main(SB)			

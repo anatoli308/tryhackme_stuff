@@ -1,0 +1,11 @@
+﻿python : Traceback (most recent call last):
+At line:1 char:1
++ python extract_strings.py 2>&1 | Out-File -FilePath extract_out.txt - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Traceback (most recent call last)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  File "D:\projects\tryhackme\finance_hunt_masquerade\extract_strings.py", line 8, in <module>
+    with open(PAYLOAD_PATH, "rb") as f:
+         ~~~~^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'D:\\projects\\tryhackme\\finance_hunt_masquerade\\decrypted_payload.bin'

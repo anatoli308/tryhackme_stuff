@@ -1,0 +1,31 @@
+Content-Type: multipart/mixed; boundary="==BOUNDARY=="
+MIME-Version: 1.0
+
+
+--==BOUNDARY==
+Content-Type: text/cloud-config
+MIME-Version: 1.0
+
+#cloud-config
+bootcmd:
+  - 'echo "userId: 69c4f97cf109ce184badb2e1" > /.badr-info'
+  - 'echo "uploadId: 68acea6201a8d7484a6062d0" >> /.badr-info'
+  - 'echo "roomId: 682b29571feacaf821a1c5c2" >> /.badr-info'
+  - 'echo "roomCode: extract" >> /.badr-info'
+  - 'echo "taskId: " >> /.badr-info'
+  - 'echo "instanceId: 69c7a5c829cf2e3a4f314559" >> /.badr-info'
+  - 'mkdir /etc/badr'
+
+runcmd:
+  - 'wget -O /etc/badr/badr "https://tryhackme-badr-deployment-production-eu-west-1.s3.eu-west-1.amazonaws.com/badr?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2YR2KKQMWLXEMXW4%2F20260328%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260328T095624Z&X-Amz-Expires=480&X-Amz-Signature=082a75d536b2d6f9dff27c8e189cb73dabf288c2d60514222181519ba909da7e&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"'
+  - 'wget -O /etc/badr/config.yaml "https://tryhackme-badr-deployment-production-eu-west-1.s3.eu-west-1.amazonaws.com/config.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2YR2KKQMWLXEMXW4%2F20260328%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260328T095624Z&X-Amz-Expires=480&X-Amz-Signature=9f704c3843238843ff53260f41811596f82b34f030463553d577491e4c3f500a&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"'
+  - 'wget -O /etc/badr/rules.yaml "https://tryhackme-badr-deployment-production-eu-west-1.s3.eu-west-1.amazonaws.com/rules.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2YR2KKQMWLXEMXW4%2F20260328%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260328T095624Z&X-Amz-Expires=480&X-Amz-Signature=84de312ce4b7e050f2265a7cd53901a835b71eff8d8ba55b0d479ee26346914a&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"'
+  - 'wget -O /etc/badr/room.config.yaml "https://tryhackme-badr-deployment-production-eu-west-1.s3.eu-west-1.amazonaws.com/extract/rules.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2YR2KKQMWLXEMXW4%2F20260328%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260328T095624Z&X-Amz-Expires=480&X-Amz-Signature=e1c63deee1998ee674d561c2cad3c44e53718921e156fdc64ca874ec22ead365&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"'
+  - 'wget -O /etc/badr/room.rules.yaml "https://tryhackme-badr-deployment-production-eu-west-1.s3.eu-west-1.amazonaws.com/extract/cat-dash-rules.yaml?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2YR2KKQMWLXEMXW4%2F20260328%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260328T095624Z&X-Amz-Expires=480&X-Amz-Signature=e716d988055395d8c9b17c00951a7a3cd8531aecac8c002d8072c2ba89f7e8f6&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"'
+  - 'wget -O /etc/systemd/system/badr.service "https://tryhackme-badr-deployment-production-eu-west-1.s3.eu-west-1.amazonaws.com/badr.service?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIA2YR2KKQMWLXEMXW4%2F20260328%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260328T095624Z&X-Amz-Expires=480&X-Amz-Signature=373e19d946c39eda6de7c5463e0025b6858abadae7c4433165c733a01a67a663&X-Amz-SignedHeaders=host&x-amz-checksum-mode=ENABLED&x-id=GetObject"'
+  - 'tmp=$(mktemp) && cat /etc/badr/rules.yaml /etc/badr/room.rules.yaml 2>/dev/null > "$tmp" && mv "$tmp" /etc/badr/rules.yaml'
+  - 'systemctl daemon-reload'
+  - 'systemctl enable badr.service'
+  - 'systemctl start badr.service'
+ 
+--==BOUNDARY==--

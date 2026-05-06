@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Juicy the Dog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="help" href="/openapi.json">
+<style>
+  :root{
+    --bg: #fffaf2;              /* soft cream background */
+    --panel: #fff8ec;           /* light beige panel */
+    --card: #fff4df;            /* pale golden card */
+    --muted: #8a7350;           /* warm brown for subtle text */
+    --accent: #d5a253;          /* golden retriever tone */
+    --accent-light: #f3c97a;
+    --text: #4b3a24;            /* deep brown text */
+  }
+
+  html, body { height: 100%; margin:0; }
+  body {
+    font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: linear-gradient(180deg, #fffdf8 0%, #fff7ea 100%);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+  }
+
+  .app {
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 20px;
+    padding: 16px;
+    height: 100dvh;
+    box-sizing: border-box;
+    min-height: 0;
+  }
+  .app > * { min-height: 0; }
+
+  .chat-column {
+    background: var(--panel);
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(139, 107, 42, 0.25);
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .topbar {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+    flex: 0 0 auto;
+  }
+  .title { font-weight:700; font-size:1.15rem; color: var(--accent); }
+  .meta { font-size:0.85rem; color:var(--muted); }
+
+  .conversation {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    scroll-behavior: smooth;
+    padding-bottom: 90px;
+  }
+
+  .message {
+    max-width:78%;
+    padding:12px 14px;
+    border-radius:14px;
+    line-height:1.4;
+    white-space:pre-wrap;
+    word-break:break-word;
+  }
+  .message.user {
+    align-self:flex-end;
+    background: linear-gradient(180deg, #fff 0%, #fffaef 100%);
+    border: 1px solid #f2e1ba;
+    border-bottom-right-radius:6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .message.assistant {
+    align-self:flex-start;
+    background: linear-gradient(180deg, #fef2d5 0%, #ffe8b7 100%);
+    border: 1px solid #f3c97a;
+    border-bottom-left-radius:6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .composer {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: flex-end;
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid #f3e0b5;
+    padding: 8px 12px;
+    gap: 10px;
+    margin: 16px 16px 24px 16px;
+    box-shadow: 0 -2px 12px rgba(138, 115, 80, 0.15);
+  }
+  .composer textarea {
+    flex: 1;
+    resize: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--text);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    height: 2.8em;
+    max-height: 40vh;
+    padding: 8px;
+  }
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+  .btn {
+    background: linear-gradient(180deg, var(--accent-light), var(--accent));
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 600;
+    cursor: pointer;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+  }
+  .btn:hover { box-shadow: 0 3px 8px rgba(213,162,83,0.4); transform: translateY(-1px); }
+  .btn:disabled { opacity:0.6; cursor:not-allowed; }
+
+  .info-column {
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    max-height: 100%;
+    min-height: 0;
+    overflow:auto;
+  }
+  .card {
+    background:var(--card);
+    border-radius:10px;
+    padding:12px;
+    border:1px solid #f3e0b5;
+    box-shadow: 0 2px 6px rgba(213,162,83,0.15);
+  }
+  .card h3 { margin:0 0 8px 0; font-size:0.95rem; color: var(--accent); }
+  .muted { color:var(--muted); font-size:0.92rem; line-height:1.4; }
+
+  /* Dog image styling */
+  .dog-wrap {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .dog-img {
+    display:block;
+    width:100%;
+    object-fit:cover;
+  }
+  .dog-caption {
+    margin-top:8px;
+    font-size:0.9rem;
+    color: var(--muted);
+  }
+
+  /* Typing indicator */
+  .typing {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:6px 8px;
+    height:28px;
+  }
+  .typing-dot {
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--accent);
+    opacity:0.25;
+    animation: blink 1s infinite ease-in-out;
+  }
+  .typing-dot:nth-child(2) { animation-delay: 0.12s; }
+  .typing-dot:nth-child(3) { animation-delay: 0.24s; }
+  @keyframes blink {
+    0% { opacity:0.25; transform: translateY(0); }
+    40% { opacity:1; transform: translateY(-3px); }
+    80% { opacity:0.25; transform: translateY(0); }
+    100% { opacity:0.25; transform: translateY(0); }
+  }
+
+  @media (max-width:980px) {
+    .app { grid-template-columns: 1fr; }
+    .info-column { max-height: none; overflow: visible; }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <main class="chat-column">
+      <div class="topbar">
+        <div>
+          <div class="title">Juicy the Dog</div>
+          <div class="meta">A friendly golden retriever who answers your questions</div>
+        </div>
+      </div>
+
+      <section class="conversation" id="conversation" aria-live="polite"></section>
+
+      <div class="composer">
+        <textarea id="messageInput" placeholder="Ask Juicy about walks, bones, or secrets he might have heard..."></textarea>
+        <div class="button-group">
+          <button class="btn" id="sendBtn">Chat</button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Single sidebar with both cards -->
+    <aside class="info-column">
+      <section class="card">
+        <h3>My Status</h3>
+        <p id="healthStatus" class="muted">Checking if Juicy is awake…</p>
+      </section>
+
+      <section class="card">
+        <h3>Who Am I</h3>
+        <div class="dog-wrap">
+          <img src="/static/juicy.png" alt="Juicy the golden retriever" class="dog-img">
+        </div>
+        <p class="dog-caption">This is Juicy. Loves long walks, tennis balls, and eavesdropping on kitchen calls.</p>
+      </section>
+    </aside>
+  </div>
+
+<script>
+const conversation = document.getElementById('conversation');
+const input = document.getElementById('messageInput');
+const sendBtn = document.getElementById('sendBtn');
+const healthStatus = document.getElementById('healthStatus');
+
+function autoScroll() {
+  requestAnimationFrame(() => {
+    conversation.scrollTop = conversation.scrollHeight;
+  });
+}
+
+function appendMessage(kind, text) {
+  const el = document.createElement('div');
+  el.className = 'message ' + (kind === 'user' ? 'user' : 'assistant');
+  if (kind === 'user') el.textContent = text;
+  else el.innerHTML = text; // intentionally unsafe for challenge
+  conversation.appendChild(el);
+  autoScroll();
+}
+
+function typingIndicator() {
+  const wrap = document.createElement('div');
+  wrap.className = 'message assistant';
+  wrap.innerHTML = '<div class="typing"><span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span></div>';
+  conversation.appendChild(wrap);
+  autoScroll();
+  return wrap;
+}
+
+async function sendMessageStream() {
+  const raw = input.value.trim();
+  if (!raw) return;
+  appendMessage('user', raw);
+  input.value = '';
+  const typing = typingIndicator();
+  let live = null, acc = '';
+  sendBtn.disabled = true; sendBtn.textContent = 'Sending…';
+  try {
+    const res = await fetch('/api/chat_stream', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: raw })
+    });
+    if (!res.body) {
+      const j = await res.json().catch(()=>null);
+      if (conversation.contains(typing)) conversation.removeChild(typing);
+      appendMessage('assistant', j && j.reply ? j.reply : '(no response)');
+      sendBtn.disabled = false; sendBtn.textContent = 'Chat';
+      return;
+    }
+    const reader = res.body.getReader();
+    const decoder = new TextDecoder();
+    let buf = '';
+    while (true) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buf += decoder.decode(value, { stream: true });
+      const frames = buf.split('\n\n');
+      buf = frames.pop();
+      for (const f of frames) {
+        if (!f.startsWith('data:')) continue;
+        let payload;
+        try { payload = JSON.parse(f.slice(5).trim()); } catch { continue; }
+        if (payload.delta) {
+          if (!live) {
+            live = document.createElement('div');
+            live.className = 'message assistant';
+            live.innerHTML = '';
+            conversation.replaceChild(live, typing);
+          }
+          acc += payload.delta;
+          live.innerHTML = acc;
+          autoScroll();
+        } else if (payload.final) {
+          const extra = payload.append || '';
+          if (extra) {
+            acc += extra;
+            if (!live) {
+              live = document.createElement('div');
+              live.className = 'message assistant';
+              conversation.replaceChild(live, typing);
+            }
+            live.innerHTML = acc;
+            autoScroll();
+          }
+        } else if (payload.error) {
+          if (conversation.contains(typing)) conversation.removeChild(typing);
+          appendMessage('assistant', 'Error: ' + payload.error);
+          sendBtn.disabled = false; sendBtn.textContent = 'Chat';
+          return;
+        }
+      }
+    }
+    if (!live) {
+      if (conversation.contains(typing)) conversation.removeChild(typing);
+      appendMessage('assistant', '(no response)');
+    }
+  } catch (e) {
+    if (conversation.contains(typing)) conversation.removeChild(typing);
+    appendMessage('assistant', 'Error: ' + e.message);
+  } finally {
+    sendBtn.disabled = false; sendBtn.textContent = 'Chat';
+  }
+}
+
+input.addEventListener('keydown', e=>{
+  if (e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendMessageStream(); }
+});
+sendBtn.addEventListener('click', sendMessageStream);
+
+async function refreshHealth() {
+  try {
+    const r = await fetch('/health');
+    const j = await r.json();
+    healthStatus.textContent = 'Juicy status: ' + (j.status || 'unknown');
+  } catch {
+    healthStatus.textContent = 'Juicy is asleep';
+  }
+}
+refreshHealth();
+</script>
+</body>
+</html>

