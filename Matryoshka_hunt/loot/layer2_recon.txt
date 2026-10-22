@@ -1,0 +1,88 @@
+===HOSTFS_HOST===
+a95a3485f61d
+0::/../a95a3485f61db4ac2c0d0778bed3cbcf5cc07111e0b2f1c4bb4d517a563b8ab2
+Name:	cat
+CapInh:	0000000000000000
+CapPrm:	00000000a82c35fb
+CapEff:	00000000a82c35fb
+CapBnd:	00000000a82c35fb
+CapAmb:	0000000000000000
+===HOSTFS_DOCKERENV===
+-rwxr-xr-x    1 root     root             0 May  8 19:20 /hostfs/.dockerenv
+===HOSTFS_SOCKETS===
+/hostfs/run/docker/libnetwork/111c4ccdd9c2.sock
+/hostfs/run/docker/containerd/containerd-debug.sock
+/hostfs/run/docker/containerd/containerd.sock
+/hostfs/run/docker/metrics.sock
+/hostfs/run/docker.sock
+srw-rw-rw-    1 root     2375             0 May  8 19:20 /hostfs/run/docker.sock
+===HOSTFS_BLOCKDEV===
+===HOSTFS_MOUNTS===
+/dev/root / ext4 rw,relatime,discard 0 0
+shm /dev/shm tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k,inode64 0 0
+shm /hostfs/dev/shm tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k,inode64 0 0
+none /hostfs/sys/kernel/security securityfs rw,relatime 0 0
+/dev/root /hostfs/etc/resolv.conf ext4 rw,relatime,discard 0 0
+/dev/root /hostfs/etc/hostname ext4 rw,relatime,discard 0 0
+/dev/root /hostfs/etc/hosts ext4 rw,relatime,discard 0 0
+/dev/root /hostfs/var/lib/docker ext4 rw,relatime,discard 0 0
+/dev/root /hostfs/var/lib/docker/vfs/dir/c4f2454be00473a7acc11c44ea9a2ae8d6a4bfe3ac69bcc2c0c6de6c22d8a2b7 ext4 rw,relatime,discard 0 0
+shm /hostfs/var/lib/docker/vfs/dir/c4f2454be00473a7acc11c44ea9a2ae8d6a4bfe3ac69bcc2c0c6de6c22d8a2b7/dev/shm tmpfs rw,nosuid,nodev,noexec,relatime,size=65536k,inode64 0 0
+none /hostfs/tmp tmpfs rw,relatime,inode64 0 0
+/dev/root /etc/resolv.conf ext4 rw,relatime,discard 0 0
+/dev/root /etc/hostname ext4 rw,relatime,discard 0 0
+/dev/root /etc/hosts ext4 rw,relatime,discard 0 0
+===HOSTFS_CAPS_OF_PID1===
+CapInh:	0000000000000000
+CapPrm:	00000000a82c35fb
+CapEff:	00000000a82c35fb
+CapBnd:	00000000a82c35fb
+CapAmb:	0000000000000000
+===HOSTFS_FLAGS===
+/hostfs/opt/images/level1-image.tar
+/hostfs/root/flag_level2.txt
+/hostfs/usr/local/bin/level2-entrypoint.sh
+===HOSTFS_GREP_FLAGS===
+THM{RUN@W@Y_S0CK3T}
+===HOSTFS_HISTORY===
+===HOSTFS_ENTRYPOINTS===
+#!/bin/sh
+set -eu
+
+# Start Docker daemon (DinD) with vfs storage driver.
+# vfs requires no overlayfs or block-device access, which is intentional:
+# it prevents inner containers from inheriting real host block devices.
+dockerd-entrypoint.sh --storage-driver=vfs > /var/log/dockerd.log 2>&1 &
+
+# Wait for it
+until docker info > /dev/null 2>&1; do
+    sleep 1
+done
+
+# Level 1 -> Level 2 vuln: make the daemon socket world-writable
+chmod 666 /var/run/docker.sock
+
+# Create Level 2 flag (only exists in Level 2 container FS)
+if [ ! -f /root/flag_level2.txt ]; then
+    echo "$LEVEL2_FLAG" > /root/flag_level2.txt
+    chmod 400 /root/flag_level2.txt
+fi
+
+# Load Level 1 image (offline-safe)
+docker image inspect matryoshka-level1:local >/dev/null 2>&1 || \
+  docker load -i /opt/images/level1-image.tar >/dev/null
+
+# Load helper image
+docker image inspect alpine:3.20 >/dev/null 2>&1 || \
+  docker load -i /opt/images/alpine-3.20.tar >/dev/null
+
+# Start Level 1
+docker rm -f level1 >/dev/null 2>&1 || true
+docker run -d --pull=never --name level1 \
+  --network none \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  matryoshka-level1:local >/dev/null
+
+# Keep container alive
+tail -f /dev/null
+===HOSTFS_END===

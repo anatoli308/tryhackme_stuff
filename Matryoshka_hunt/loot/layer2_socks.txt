@@ -1,0 +1,5 @@
+/hostfs/run/docker/libnetwork/111c4ccdd9c2.sock
+/hostfs/run/docker/containerd/containerd-debug.sock
+/hostfs/run/docker/containerd/containerd.sock
+/hostfs/run/docker/metrics.sock
+/hostfs/run/docker.sock

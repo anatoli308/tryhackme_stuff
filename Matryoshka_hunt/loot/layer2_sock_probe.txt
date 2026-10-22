@@ -1,0 +1,10 @@
+==TRY /hostfs/run/docker.sock==
+==TRY /hostfs/run/docker/containerd/containerd-debug.sock==
+==TRY /hostfs/run/docker/containerd/containerd.sock==
+==TRY /hostfs/run/docker/libnetwork/111c4ccdd9c2.sock==
+==TRY /hostfs/run/docker/metrics.sock==
+==TRY /hostfs/run/docker.sock==
+==TRY /hostfs/run/docker/containerd/containerd-debug.sock==
+==TRY /hostfs/run/docker/containerd/containerd.sock==
+==TRY /hostfs/run/docker/libnetwork/111c4ccdd9c2.sock==
+==TRY /hostfs/run/docker/metrics.sock==

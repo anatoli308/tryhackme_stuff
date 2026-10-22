@@ -1,0 +1,5 @@
+--/flag*.txt--
+--/root/flag.txt--
+--/home/*/flag.txt--
+--/level2*.txt--
+--/tmp/flag*.txt--

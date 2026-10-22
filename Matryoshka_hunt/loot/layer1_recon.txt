@@ -1,0 +1,97 @@
+===HOST===
+1311133f5f16
+Linux 1311133f5f16 6.17.0-1013-aws #13~24.04.1-Ubuntu SMP Fri Apr 24 21:50:45 UTC 2026 x86_64 GNU/Linux
+uid=1000(matryoshka) gid=1000(matryoshka) groups=1000(matryoshka)
+matryoshka
+===MARKERS===
+dockerenv:YES
+0::/
+===CAPS===
+CapInh:	0000000000000000
+CapPrm:	0000000000000000
+CapEff:	0000000000000000
+CapBnd:	00000000a80425fb
+CapAmb:	0000000000000000
+===MOUNTS===
+/dev/root on / type ext4 (rw,relatime,discard)
+shm on /dev/shm type tmpfs (rw,nosuid,nodev,noexec,relatime,size=65536k,inode64)
+/dev/root on /etc/resolv.conf type ext4 (rw,relatime,discard)
+/dev/root on /etc/hostname type ext4 (rw,relatime,discard)
+/dev/root on /etc/hosts type ext4 (rw,relatime,discard)
+===BLOCKDEV===
+===DOCKER===
+srw-rw-rw- 1 root 2375 0 May  8 19:20 /run/docker.sock
+srw-rw-rw- 1 root 2375 0 May  8 19:20 /var/run/docker.sock
+/usr/bin/docker
+===SUDO===
+/tmp/.mhunt.sh: line 20: sudo: command not found
+===SUID===
+===WRITE===
+total 0
+drwxr-xr-x 2 root root 0 May  8 19:33 .
+drwxr-xr-x 9 root root 0 May  8 19:33 ..
+-r--r--r-- 1 root root 0 May  8 19:33 cgroup.controllers
+-r--r--r-- 1 root root 0 May  8 19:33 cgroup.events
+===HOMES===
+/:
+total 64
+drwxr-xr-x  19 root root 4096 May  8 19:20 .
+drwxr-xr-x  19 root root 4096 May  8 19:20 ..
+-rwxr-xr-x   1 root root    0 May  8 19:20 .dockerenv
+drwxr-xr-x   2 root root 4096 May  4 14:25 bin
+drwxr-xr-x   5 root root  340 May  8 19:20 dev
+drwxr-xr-x  20 root root 4096 May  8 19:20 etc
+drwxr-xr-x   3 root root 4096 May  4 14:25 home
+drwxr-xr-x   6 root root 4096 May  4 14:25 lib
+drwxr-xr-x   5 root root 4096 Apr 15 16:09 media
+drwxr-xr-x   2 root root 4096 Apr 15 16:09 mnt
+drwxr-xr-x   2 root root 4096 Apr 15 16:09 opt
+dr-xr-xr-x 214 root root    0 May  8 19:20 proc
+drwx------   2 root root 4096 Apr 15 16:09 root
+drwxr-xr-x   2 root root 4096 May  8 19:20 run
+drwxr-xr-x   2 root root 4096 May  4 14:25 sbin
+drwxr-xr-x   2 root root 4096 Apr 15 16:09 srv
+dr-xr-xr-x  13 root root    0 May  8 19:33 sys
+drwxrwxrwt   2 root root 4096 May  8 19:33 tmp
+drwxr-xr-x   8 root root 4096 May  4 14:25 usr
+drwxr-xr-x  12 root root 4096 Apr 15 16:09 var
+
+/home:
+total 12
+drwxr-xr-x  3 root       root       4096 May  4 14:25 .
+drwxr-xr-x 19 root       root       4096 May  8 19:20 ..
+drwxr-sr-x  2 matryoshka matryoshka 4096 May  8 19:22 matryoshka
+
+/opt:
+total 8
+drwxr-xr-x  2 root root 4096 Apr 15 16:09 .
+drwxr-xr-x 19 root root 4096 May  8 19:20 ..
+
+/srv:
+total 8
+drwxr-xr-x  2 root root 4096 Apr 15 16:09 .
+drwxr-xr-x 19 root root 4096 May  8 19:20 ..
+===FLAGS===
+/sys/devices/virtual/net/lo/flags
+===HISTORY===
+ls
+ls -l
+ls -al
+cd
+ls
+cd ..
+c d..
+cd ..
+ls
+cd usr/
+ls
+cd local/
+ls
+cd bin/
+ls
+cd
+exit
+===NET===
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    inet 127.0.0.1/8 scope host lo
+===END===
